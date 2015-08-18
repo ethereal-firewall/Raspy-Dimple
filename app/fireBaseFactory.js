@@ -5,7 +5,7 @@ angular.module("App")
   var game = null;
   var playerKey = null;
   var gameOptions = {};
-  gameOptions.timeLeft = 15;
+  gameOptions.timeLeft = 60;
   gameOptions.endRound = 10;
   
   // Generate a random string of 5 characters that we will use for our game ID's.
