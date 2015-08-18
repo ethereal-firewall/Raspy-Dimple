@@ -33,7 +33,7 @@ angular.module('App')
     $scope.submitPlayerAnswer = function(answer) {
       $scope.holdView = true;
       
-      var ref = new Firebase('https://exposeyourself.firebaseio.com/games/' + game.$id);
+      var ref = new Firebase(fireBaseFactory.firebaseRef + '/games/' + game.$id);
       if ($scope.answer !== undefined){
         answer = $scope.answer;
         ref.child('answers').child(playerKey).update({
