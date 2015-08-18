@@ -4,8 +4,9 @@ angular.module("App")
   var ref = new Firebase(firebaseRef + "/games");
   var game = null;
   var playerKey = null;
-  var TIME_LEFT = 15;
-  var END_ROUND = 10;
+  var gameOptions = {};
+  gameOptions.timeLeft = 15;
+  gameOptions.endRound = 10;
   
   // Generate a random string of 5 characters that we will use for our game ID's.
    var createGameID = function () {
@@ -26,7 +27,7 @@ angular.module("App")
       active: false,
       currentRound: 1,
       currentView: 'question',
-      timeLeft: TIME_LEFT,
+      timeLeft: gameOptions.timeLeft,
       questions: {
         1: "What does JARVIS like to do on a Saturday night?",
         2: "What is JARVIS's favorite type of food?",
@@ -161,16 +162,16 @@ angular.module("App")
   };
 
   var getGameTime = function() {
-    return TIME_LEFT;
+    return gameOptions.timeLeft;
   };
 
   var getEndRound = function(){
-    return END_ROUND;
+    return gameOptions.endRound;
   };
 
   var resetTimeLeft = function(){
     var ref = new Firebase(firebaseRef + '/games/' + game.$id);
-    ref.child('timeLeft').set(TIME_LEFT);
+    ref.child('timeLeft').set(gameOptions.timeLeft);
   };
 
   var addQuestions = function(callback) {
@@ -205,25 +206,25 @@ angular.module("App")
         var tempQuestions = [];
         console.log(questions.val());
         angular.forEach(questions.val(), function(question) {
-          tempQuestions.push(question.question);
+          tempQuestions.push(question);
         });
         // add ten random questions and add a random name to each one where 'JARVIS' is located
         var ref = new Firebase(firebaseRef + '/games/' + game.$id);
         var counter = 1;
 
-        var tempQuestions = shuffleQuestions(tempQuestions).slice(0,10);
+        var tempQuestions = shuffleQuestions(tempQuestions).slice(0, gameOptions.endRound);
 
         // This checks if we've added all 10 questions to the game object
         // in the Firebase database first. If so, then we call our callback function
         // which will pass both host and player into the game with the correct questions.
         var checkCallback = function() {
-          if (counter === 10) {
+          if (counter === gameOptions.endRound) {
             callback();
           }
         }
 
         angular.forEach(tempQuestions, function(question) {
-          if(counter <= 10) {
+          if(counter <= gameOptions.endRound) {
             var tempQues = {};
             tempQues[counter] = replaceName(question, randomName(tempPlayers));
             ref.child('questions').update(tempQues);
@@ -247,6 +248,18 @@ angular.module("App")
 
 
   // var QUESTIONS = "ADD THE JSON DATA HERE";
+  // var QUESTIONS = [
+  //   "What does JARVIS like to do on a Saturday night?",
+  //   "What is JARVIS's favorite type of food?",
+  //   "What is JARVIS's favorite animal?",
+  //   "What does JARVIS think about in the shower?",
+  //   "What is JARVIS's favorite song?",
+  //   "Why did JARVIS fail clown school?",
+  //   "What did JARVIS's parents say to them when they were born?",
+  //   "What was JARVIS doing last night?",
+  //   "This is JARVIS's favorite pickup line: _____________",
+  //   "What is JARVIS's super power?"
+  // ];
   // var pushToFirebase = function(array) {
   //     var ref = new Firebase(firebaseRef + '/');
   //     for(var i = 0; i < array.length; i++) {
@@ -256,6 +269,7 @@ angular.module("App")
   // pushToFirebase(QUESTIONS);
 
   return {
+    gameOptions: gameOptions,
     firebaseRef: firebaseRef, 
     addQuestions: addQuestions,
     checkActive: checkActive,
