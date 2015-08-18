@@ -1,7 +1,7 @@
 angular.module("App")
 .factory("fireBaseFactory", function($firebaseObject, $firebaseArray) {
-  
-  var ref = new Firebase("https://exposeyourself.firebaseio.com/games");
+  var firebaseRef = 'https://exposeyourselfagain.firebaseio.com';
+  var ref = new Firebase(firebaseRef + "/games");
   var game = null;
   var playerKey = null;
   var TIME_LEFT = 15;
@@ -48,7 +48,7 @@ angular.module("App")
     ref.child(gameID).set(gameObject);
 
     // Once we've instantiated the game, let's get the object back so we can utilize it.
-    var newRef = new Firebase("https://exposeyourself.firebaseio.com/games/" + gameID);
+    var newRef = new Firebase(firebaseRef + "/games/" + gameID);
     game = $firebaseObject(newRef);
     return game;
   };
@@ -57,7 +57,7 @@ angular.module("App")
     // Convert our ID to Upper Case since that's what's created by our short code generator.
     var id = id.toUpperCase();
     
-    var newRef = new Firebase("https://exposeyourself.firebaseio.com/games/" + id);
+    var newRef = new Firebase(firebaseRef + "/games/" + id);
     playerKey = newRef.child("players").push({name: name, votes: 0}).key();
     game = $firebaseObject(newRef);
     return game;
@@ -72,7 +72,7 @@ angular.module("App")
 
     // Query our current game ID to find out if the game is in an active state.
     // This query method can be found here: https://www.firebase.com/blog/2013-10-01-queries-part-one.html#byid
-    new Firebase("https://exposeyourself.firebaseio.com/games/" + id + "/active").once('value', function(data) {
+    new Firebase(firebaseRef + "/games/" + id + "/active").once('value', function(data) {
       activeGame = data.val();
     });
 
@@ -87,7 +87,7 @@ angular.module("App")
     var curView;
     // Query game to find out if the game is in an active state.
     // This query method can be found here: https://www.firebase.com/blog/2013-10-01-queries-part-one.html#byid
-    new Firebase("https://exposeyourself.firebaseio.com/games/" + game.$id + "/currentView").once('value', function(data) {
+    new Firebase(firebaseRef + "/games/" + game.$id + "/currentView").once('value', function(data) {
       curView = data.val();
     });
 
@@ -98,7 +98,7 @@ angular.module("App")
   var updateCurrentView = function(view) {
     // Query game to find out if the game is in an active state.
     // This query method can be found here: https://www.firebase.com/blog/2013-10-01-queries-part-one.html#byid
-    var ref = new Firebase("https://exposeyourself.firebaseio.com/games/" + game.$id);
+    var ref = new Firebase(firebaseRef + "/games/" + game.$id);
     ref.update({currentView: view});
   }
 
@@ -118,13 +118,13 @@ angular.module("App")
   };
 
   var setJoin = function(canJoin, id){
-    var newRef = new Firebase("https://exposeyourself.firebaseio.com/games/" + id);
+    var newRef = new Firebase(firebaseRef + "/games/" + id);
     newRef.update({join: canJoin});
     newRef.update({active: true});
   };
 
   var incrementPlayerScore = function(playerKey) {
-    var ref = new Firebase('https://exposeyourself.firebaseio.com/games/' + game.$id);
+    var ref = new Firebase(firebaseRef + '/games/' + game.$id);
     ref.child('answers').child(playerKey).child('votes').transaction(function(currentVotes) {
       return ++currentVotes;
     });
@@ -134,29 +134,29 @@ angular.module("App")
   };
 
   var incrementRound = function() {
-    var ref = new Firebase('https://exposeyourself.firebaseio.com/games/' + game.$id);
+    var ref = new Firebase(firebaseRef + '/games/' + game.$id);
     ref.child('currentRound').transaction(function(currentRound) {
       return ++currentRound;
     })
   };
 
   var clearAnswers = function() {
-    var ref = new Firebase('https://exposeyourself.firebaseio.com/games/' + game.$id);
+    var ref = new Firebase(firebaseRef + '/games/' + game.$id);
     ref.child('answers').remove();
   };
 
   var getPlayerNames = function() {
-    var ref = new Firebase('https://exposeyourself.firebaseio.com/games/' + game.$id);
+    var ref = new Firebase(firebaseRef + '/games/' + game.$id);
     return $firebaseArray(ref.child('players'));
   };
 
   var getPlayerAnswers = function() {
-    var ref = new Firebase('https://exposeyourself.firebaseio.com/games/' + game.$id);
+    var ref = new Firebase(firebaseRef + '/games/' + game.$id);
     return $firebaseArray(ref.child('answers'));
   };
 
   var getTimeLeft = function() {
-    var ref = new Firebase('https://exposeyourself.firebaseio.com/games/' + game.$id);
+    var ref = new Firebase(firebaseRef + '/games/' + game.$id);
     return $firebaseObject(ref.child('timeLeft'));
   };
 
@@ -169,7 +169,7 @@ angular.module("App")
   };
 
   var resetTimeLeft = function(){
-    var ref = new Firebase('https://exposeyourself.firebaseio.com/games/' + game.$id);
+    var ref = new Firebase(firebaseRef + '/games/' + game.$id);
     ref.child('timeLeft').set(TIME_LEFT);
   };
 
@@ -193,14 +193,14 @@ angular.module("App")
     };
 
     // get access to the names for the current game
-    var ref = new Firebase('https://exposeyourself.firebaseio.com/games/' + game.$id + '/players');
+    var ref = new Firebase(firebaseRef + '/games/' + game.$id + '/players');
     ref.once('value', function(players) {
       var tempPlayers = [];
       console.log(players.val());
       angular.forEach(players.val(), function(player) {
         tempPlayers.push(player.name);
       });
-      var ref = new Firebase('https://exposeyourself.firebaseio.com/questionDB');
+      var ref = new Firebase(firebaseRef + '/questionDB');
       ref.once('value', function(questions) {
         var tempQuestions = [];
         console.log(questions.val());
@@ -208,7 +208,7 @@ angular.module("App")
           tempQuestions.push(question.question);
         });
         // add ten random questions and add a random name to each one where 'JARVIS' is located
-        var ref = new Firebase('https://exposeyourself.firebaseio.com/games/' + game.$id);
+        var ref = new Firebase(firebaseRef + '/games/' + game.$id);
         var counter = 1;
 
         var tempQuestions = shuffleQuestions(tempQuestions).slice(0,10);
@@ -248,7 +248,7 @@ angular.module("App")
 
   // var QUESTIONS = "ADD THE JSON DATA HERE";
   // var pushToFirebase = function(array) {
-  //     var ref = new Firebase('https://exposeyourself.firebaseio.com/');
+  //     var ref = new Firebase(firebaseRef + '/');
   //     for(var i = 0; i < array.length; i++) {
   //         ref.child('questionDB').push(array[i]);
   //     }
@@ -256,6 +256,7 @@ angular.module("App")
   // pushToFirebase(QUESTIONS);
 
   return {
+    firebaseRef: firebaseRef, 
     addQuestions: addQuestions,
     checkActive: checkActive,
     createGame: createGame,
