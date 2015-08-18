@@ -1,2 +1,7 @@
 app/lib
 .DS_Store
+node_modules
+.public/**
+.public/lib/
+
+!.public/.gitkeep

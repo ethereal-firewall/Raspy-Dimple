@@ -1,9 +1,10 @@
 {
   "firebase": "exposeyourselfagain",
-  "public": "./app",
+  "public": "./.public",
   "ignore": [
     "firebase.json",
     "**/.*",
-    "**/node_modules/**"
+    "**/node_modules/**",
+    "./app"
   ]
 }
