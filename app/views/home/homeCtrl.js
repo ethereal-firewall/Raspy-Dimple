@@ -25,6 +25,6 @@ angular.module("App")
 .directive('gameOptions', function () {
   return {
     restrict: 'E',
-    templateUrl: 'create/gameOptions.html'
+    templateUrl: 'views/gameOptions.html'
   };
 });
