@@ -5,6 +5,8 @@
 angular.module("App")
 .controller("createCtrl", ["$scope", "$state", "fireBaseFactory", function($scope, $state, fireBaseFactory){
 
+  // fireBaseFactory.createGame();
+
   var game = fireBaseFactory.getGame();
   // display the code 
   $scope.code = game.$id;
@@ -17,6 +19,7 @@ angular.module("App")
     // Added a callback parameter for the addQuestion method in the factory.
     // This will not trigger the state change until we've added 10 questions to the database.
     fireBaseFactory.addQuestions(function() {
+      console.log('INSIDE THE MOTHAFUCKIN CALLBACK!');
       fireBaseFactory.setJoin(false, game.$id);// no more people can join the game
       $state.go("question_display"); // navigate to the question display page
     });
