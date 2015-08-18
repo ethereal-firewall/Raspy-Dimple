@@ -3,7 +3,8 @@
   <h1 id="title">EXPOSED!</h1>
 
   <div id="home-options">
-    <p><a ng-click="createGame()" href="">create game</a></p>
+    <p><a ng-click="toggleGameOptions()" href="">create game</a></p>
+    <game-options ng-show="gameOptions.show"></game-options>
     <p><a ui-sref="join">join game</a></p>
   </div>
 </div>
