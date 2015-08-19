@@ -82,7 +82,10 @@ module.exports = function(grunt) {
       files: [
         './app/**/*.js',
         './Gruntfile.js'
-      ]
+      ],
+      options: {
+        force: 'true'
+      }
     },
 
     watch: {
