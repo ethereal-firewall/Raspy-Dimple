@@ -46,6 +46,8 @@ angular.module("App")
   var joinGame = function(id, name, photo) {
     // Convert our ID to Upper Case since that's what's created by our short code generator.
     var id = id.toUpperCase();
+
+    photo = photo || '';
     
     var newRef = new Firebase(firebaseRef + "/games/" + id);
     playerKey = newRef.child("players").push({name: name, votes: 0, photo: photo, submit:false}).key();
