@@ -28,18 +28,6 @@ angular.module("App")
       currentRound: 1,
       currentView: 'question',
       timeLeft: gameOptions.timeLeft,
-      questions: {
-        1: "What does JARVIS like to do on a Saturday night?",
-        2: "What is JARVIS's favorite type of food?",
-        3: "What is JARVIS's favorite animal?",
-        4: "What does JARVIS think about in the shower?",
-        5: "What is JARVIS's favorite song?",
-        6: "Why did JARVIS fail clown school?",
-        7: "What did JARVIS's parents say to them when they were born?",
-        8: "What was JARVIS doing last night?",
-        9: "This is JARVIS's favorite pickup line: _____________",
-        10: "What is JARVIS's super power?"
-      }
     };
     var gameID = createGameID();
 
@@ -174,65 +162,76 @@ angular.module("App")
     ref.child('timeLeft').set(gameOptions.timeLeft);
   };
 
+  var questionGenerator = function(users) {
+    var parts = {
+      '(O)': [ 'cat', 'inflatable raft', 'frog', 'pony', 'pizza' ],
+      '(VT)': [ 'kick', 'poke', 'sit on', 'pet', 'destroy', 'defenestrate', 'slap', 'caress' ],
+      '(VI)': [ 'eat', 'lick' ],
+      '(P)': [ 'eating', 'licking', 'teasing', 'talking to' ],
+      '(T)': [ 'yesterday', 'last summer', 'tonight', 'today', 'long ago', 'in the before time' ]
+    }
+
+    parts['(S)'] = users;
+
+    var sentenceFrames = [
+      'Why did (S) (VT) the (O)?',
+      'Why does (S) love (VI)ing (S)?',
+      'What did (S) (VT) the (O) with?',
+      'Where did (S) (VI)?',
+      'What did (S) do (T)?',
+      'Why did (S) (VT) (S) with the (O)?',
+      'What does (S) do with the (O)?',
+      'What is (S)\'s favourite (O)?',
+      'Why does (S) like (P) (O)s?',
+      '(S) is always (P). Why?',
+    ];
+
+    var randomItem = function(arr) {
+      return arr[Math.floor( Math.random() * (arr.length) )];
+    };
+
+    // Matches anything between and including rounded brackets ()
+    var regex = new RegExp(/[(]\w+[)]/g);
+    var randomQuestion = randomItem(sentenceFrames);
+
+
+    randomQuestion.match(regex).forEach(function(placeholder) {
+      randomQuestion = randomQuestion.replace(placeholder, randomItem(parts[placeholder]));
+    });
+    return randomQuestion;
+  };
+
   var addQuestions = function(callback) {
-    var replaceName = function(string, replaceWith) {
-      // replace 'JARVIS' with player name
-      return string.replace('JARVIS', replaceWith);
-    };
-    var randomName = function(playersArray) {
-      var randomNum = Math.floor(Math.random() * (playersArray.length));
-      return playersArray[randomNum];
-    };
-    var shuffleQuestions = function(questionsArray) {
-      for(var i = 0; i < questionsArray.length; i++) {
-        var random = Math.floor(Math.random()*(questionsArray.length-i))+i;
-        var temp = questionsArray[i];
-        questionsArray[i] =  questionsArray[random];
-        questionsArray[random] = temp;
-      }
-      return questionsArray;
-    };
 
     // get access to the names for the current game
     var ref = new Firebase(firebaseRef + '/games/' + game.$id + '/players');
     ref.once('value', function(players) {
       var tempPlayers = [];
-      console.log(players.val());
       angular.forEach(players.val(), function(player) {
         tempPlayers.push(player.name);
       });
-      var ref = new Firebase(firebaseRef + '/questionDB');
-      ref.once('value', function(questions) {
-        var tempQuestions = [];
-        console.log(questions.val());
-        angular.forEach(questions.val(), function(question) {
-          tempQuestions.push(question);
-        });
-        // add ten random questions and add a random name to each one where 'JARVIS' is located
-        var ref = new Firebase(firebaseRef + '/games/' + game.$id);
-        var counter = 1;
 
-        var tempQuestions = shuffleQuestions(tempQuestions).slice(0, gameOptions.endRound);
+      var tempQuestions = [];
 
-        // This checks if we've added all 10 questions to the game object
-        // in the Firebase database first. If so, then we call our callback function
-        // which will pass both host and player into the game with the correct questions.
-        var checkCallback = function() {
-          if (counter === gameOptions.endRound) {
-            callback();
-          }
+      for (var i = 0; i < gameOptions.endRound; i++) {
+        tempQuestions.push(questionGenerator(tempPlayers));
+      };
+
+      // add ten random questions and add a random name to each one where 'JARVIS' is located
+      var ref = new Firebase(firebaseRef + '/games/' + game.$id);
+
+      // This checks if we've added all 10 questions to the game object
+      // in the Firebase database first. If so, then we call our callback function
+      // which will pass both host and player into the game with the correct questions.
+      var checkCallback = function() {
+        if (tempQuestions.length === gameOptions.endRound) {
+          callback();
         }
+      }
 
-        angular.forEach(tempQuestions, function(question) {
-          if(counter <= gameOptions.endRound) {
-            var tempQues = {};
-            tempQues[counter] = replaceName(question, randomName(tempPlayers));
-            ref.child('questions').update(tempQues);
-            counter++;
-          }
-          checkCallback(); // Trying to invoke a callback function here...    
-        });
-      });
+      ref.child('questions').update(tempQuestions);
+      checkCallback(); // Trying to invoke a callback function here...    
+      
     });
   };
 
