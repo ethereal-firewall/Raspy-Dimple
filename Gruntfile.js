@@ -68,6 +68,9 @@ module.exports = function(grunt) {
           stdout: true,
           stderr: true
         }
+      },
+      localserver: {
+        command: 'nodemon server.js'
       }
     },
 
@@ -147,10 +150,10 @@ module.exports = function(grunt) {
     grunt.task.run(['build']);
     if (grunt.option('prod')) {
       //
-      grunt.task.run(['shell']);
+      grunt.task.run(['shell:firebase']);
     }
     else {
-      grunt.task.run(['server-dev']);
+      grunt.task.run(['shell:localserver']);
     }
   });
 
