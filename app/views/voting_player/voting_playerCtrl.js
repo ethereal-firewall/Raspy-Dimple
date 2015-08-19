@@ -33,7 +33,6 @@ angular.module('App')
     $scope.chooseAnswer = function(answerPlayerKey) {
       // increment the current answers vote count
       $scope.holdView = true;
-      fireBaseFactory.incrementPlayerScore(playerKey);
       fireBaseFacotry.setSubmit(playerKey);
       if (answerPlayerKey === $scope.question.subject) fireBaseFactory.incrementPlayerScore(playerKey);
       fireBaseFactory.incrementPlayerScore(answerPlayerKey);
