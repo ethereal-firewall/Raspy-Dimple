@@ -170,7 +170,7 @@ angular.module("App")
       '(VI)': [ 'eat', 'lick' ],
       '(P)': [ 'eating', 'licking', 'teasing', 'talking to' ],
       '(T)': [ 'yesterday', 'last summer', 'tonight', 'today', 'long ago', 'in the before time' ]
-    }
+    };
 
     parts['(S)'] = users;
 
@@ -195,11 +195,17 @@ angular.module("App")
     var regex = new RegExp(/[(]\w+[)]/g);
     var randomQuestion = randomItem(sentenceFrames);
 
+    var subjectForScoring = null;
 
     randomQuestion.match(regex).forEach(function(placeholder) {
-      randomQuestion = randomQuestion.replace(placeholder, randomItem(parts[placeholder]));
+      var randomFiller = randomItem(parts[placeholder]);
+      if (placeholder === '(S)' && subjectForScoring === null) subjectForScoring = randomFiller;
+      randomQuestion = randomQuestion.replace(placeholder, randomFiller);
     });
-    return randomQuestion;
+    return {
+      subject: subjectForScoring,
+      question: randomQuestion
+    };
   };
 
   var addQuestions = function(callback) {
@@ -212,10 +218,10 @@ angular.module("App")
         tempPlayers.push(player.name);
       });
 
-      var tempQuestions = [];
+      var tempQuestions = {};
 
-      for (var i = 0; i < gameOptions.endRound; i++) {
-        tempQuestions.push(questionGenerator(tempPlayers));
+      for (var i = 1; i <= gameOptions.endRound; i++) {
+        tempQuestions[i] = questionGenerator(tempPlayers);
       };
 
       // add ten random questions and add a random name to each one where 'JARVIS' is located
@@ -224,14 +230,15 @@ angular.module("App")
       // This checks if we've added all 10 questions to the game object
       // in the Firebase database first. If so, then we call our callback function
       // which will pass both host and player into the game with the correct questions.
-      var checkCallback = function() {
-        if (tempQuestions.length === gameOptions.endRound) {
-          callback();
-        }
-      }
+      // var checkCallback = function() {
+      //   if (tempQuestions.length === gameOptions.endRound) {
+      //     callback();
+      //   }
+      // };
 
       ref.child('questions').update(tempQuestions);
-      checkCallback(); // Trying to invoke a callback function here...    
+      // checkCallback(); // Trying to invoke a callback function here...
+      callback();
       
     });
   };
