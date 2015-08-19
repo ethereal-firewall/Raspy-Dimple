@@ -8,8 +8,7 @@
     <p>
       <label>Enter your name:</label>
       <input ng-model='join.name'>
-      <input type="file" accept="image/*;capture=camera">
-
+      <input type="file" accept="image/*;capture=camera" fileread="join.photo">
     </p>
     <button id="join-button" name="submit" ng-click="go()">GO!</button>
   </form>

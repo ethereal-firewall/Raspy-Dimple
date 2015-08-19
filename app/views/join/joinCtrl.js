@@ -30,7 +30,7 @@ angular.module("App")
   // Once this is done, we redirect player to the question page, using $state.
   $scope.go = function() {
     $scope.holdGame = true;
-    fireBaseFactory.joinGame($scope.join.code, $scope.join.name);
+    fireBaseFactory.joinGame($scope.join.code, $scope.join.name, $scope.join.photo);
 
     // Setting up an interval to poll Firebase and see if the game is ready to start yet.
     // Store interval promise so that we can destroy it once we're done.

@@ -43,12 +43,12 @@ angular.module("App")
     return game;
   };
 
-  var joinGame = function(id, name) {
+  var joinGame = function(id, name, photo) {
     // Convert our ID to Upper Case since that's what's created by our short code generator.
     var id = id.toUpperCase();
     
     var newRef = new Firebase(firebaseRef + "/games/" + id);
-    playerKey = newRef.child("players").push({name: name, votes: 0, submit:false}).key();
+    playerKey = newRef.child("players").push({name: name, votes: 0, photo: photo, submit:false}).key();
     game = $firebaseObject(newRef);
     return game;
   };

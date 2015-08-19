@@ -1,4 +1,4 @@
-angular.module('app')
+angular.module('App')
 .directive("fileread", [function () {
   return {
     scope: {
