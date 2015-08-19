@@ -27,7 +27,6 @@ angular.module('App')
     // navigate to new question or to final result
     $scope.toNextDisplay = function() {
       if ($scope.currentRound >= $scope.endRound) {
-        console.log('TRYING TO GO TO FINAL RESULTS PAGE');
         $state.go('final_result_player');
       } else {
         $state.go('question_player');
