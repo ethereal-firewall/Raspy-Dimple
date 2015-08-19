@@ -29,7 +29,7 @@ angular.module('App')
 
 			});
 
-			$scope.toHome = function() {
+		$scope.toHome = function() {
 			$state.go("home");
-		}
-	})
+		};
+	});

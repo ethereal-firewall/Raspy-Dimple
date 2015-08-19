@@ -26,8 +26,9 @@ angular.module("App")
       join: true,
       active: false,
       currentRound: 1,
+      endRound: gameOptions.endRound,
       currentView: 'question',
-      timeLeft: gameOptions.timeLeft,
+      timeLeft: gameOptions.timeLeft
     };
     var gameID = createGameID();
 
