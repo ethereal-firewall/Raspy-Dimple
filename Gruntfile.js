@@ -13,7 +13,7 @@ module.exports = function(grunt) {
       js: ['./.public/*.js'],
       css: ['./.public/*.css'],
       views: ['./.public/views/'],
-      views: ['./.public/directives/']
+      directives: ['./.public/directives/']
     },
 
     concat: {
