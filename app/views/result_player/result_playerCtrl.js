@@ -11,6 +11,7 @@ angular.module('App')
         $scope.question = data.questions[data.currentRound];
         // get current round
         $scope.currentRound = data.currentRound;
+        $scope.endRound = data.endRound;
         $scope.players = data.players;
         $scope.timeLeft = fireBaseFactory.getTimeLeft();
       });
@@ -25,7 +26,8 @@ angular.module('App')
 
     // navigate to new question or to final result
     $scope.toNextDisplay = function() {
-      if ($scope.currentRound >= fireBaseFactory.getEndRound()) {
+      if ($scope.currentRound >= $scope.endRound) {
+        console.log('TRYING TO GO TO FINAL RESULTS PAGE');
         $state.go('final_result_player');
       } else {
         $state.go('question_player');
