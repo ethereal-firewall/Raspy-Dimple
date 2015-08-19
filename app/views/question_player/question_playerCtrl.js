@@ -41,6 +41,7 @@ angular.module('App')
           response: answer,
           votes: 0
         });
+        fireBaseFactory.setSubmit(playerKey); 
       }
     };
   });

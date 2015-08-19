@@ -34,6 +34,7 @@ angular.module('App')
       // increment the current answers vote count
       $scope.holdView = true;
       fireBaseFactory.incrementPlayerScore(playerKey);
+      fireBaseFacotry.setSubmit(playerKey);
     };
 
     $scope.filterPlayer = function(answer){
