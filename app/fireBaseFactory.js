@@ -199,7 +199,10 @@ angular.module("App")
 
     randomQuestion.match(regex).forEach(function(placeholder) {
       var randomFiller = randomItem(parts[placeholder]);
-      if (placeholder === '(S)' && subjectForScoring === null) subjectForScoring = randomFiller;
+      if (typeof randomFiller === 'object') {
+        if (subjectForScoring === null) subjectForScoring = randomFiller.key;
+        randomFiller = randomFiller.name;
+      }
       randomQuestion = randomQuestion.replace(placeholder, randomFiller);
     });
     return {
@@ -214,8 +217,9 @@ angular.module("App")
     var ref = new Firebase(firebaseRef + '/games/' + game.$id + '/players');
     ref.once('value', function(players) {
       var tempPlayers = [];
-      angular.forEach(players.val(), function(player) {
-        tempPlayers.push(player.name);
+      angular.forEach(players.val(), function(player, key) {
+        player.key = key;
+        tempPlayers.push(player);
       });
 
       var tempQuestions = {};
