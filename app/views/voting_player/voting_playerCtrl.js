@@ -30,10 +30,11 @@ angular.module('App')
       }
     },250,0);
 
-    $scope.chooseAnswer = function(playerKey) {
+    $scope.chooseAnswer = function(answerPlayerKey) {
       // increment the current answers vote count
       $scope.holdView = true;
-      fireBaseFactory.incrementPlayerScore(playerKey);
+      if (answerPlayerKey === $scope.question.subject) fireBaseFactory.incrementPlayerScore(playerKey);
+      fireBaseFactory.incrementPlayerScore(answerPlayerKey);
     };
 
     $scope.filterPlayer = function(answer){
