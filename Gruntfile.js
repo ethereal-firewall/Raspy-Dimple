@@ -127,7 +127,7 @@ module.exports = function(grunt) {
     grunt.task.run(['cssmin']);
     grunt.task.run(['copy']);
     if (grunt.option('prod')) {
-      grunt.task.run(['uglify'])
+      //grunt.task.run(['uglify'])
     }
 
   });
