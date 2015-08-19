@@ -14,12 +14,15 @@ angular.module("App")
   // for moving on to the next screen
   var intQuestionPromise = $interval(function() {
     $scope.timeLeft.$value--;
-    if ($scope.timeLeft.$value <= 0){
-      $interval.cancel(intQuestionPromise); // Cancel the interval once we're done with it.
-      fireBaseFactory.resetTimeLeft();
-      fireBaseFactory.updateCurrentView('results'); // Force client to update!
-      $scope.toResultDisplay(); // Host view will update!
-    }
+    fireBaseFactory.allSubmitted().then(function(submitted) {
+      if ($scope.timeLeft.$value <= 0){
+        fireBaseFactory.clearSubmit();
+        $interval.cancel(intQuestionPromise); // Cancel the interval once we're done with it.
+        fireBaseFactory.resetTimeLeft();
+        fireBaseFactory.updateCurrentView('results'); // Force client to update!
+        $scope.toResultDisplay(); // Host view will update!
+      }
+    });
   },1000, fireBaseFactory.getGameTime());
 
   // I think we need this to populate our answers.

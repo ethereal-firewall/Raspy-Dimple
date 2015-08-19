@@ -47,7 +47,7 @@ angular.module("App")
     var id = id.toUpperCase();
     
     var newRef = new Firebase(firebaseRef + "/games/" + id);
-    playerKey = newRef.child("players").push({name: name, votes: 0}).key();
+    playerKey = newRef.child("players").push({name: name, votes: 0, submit:false}).key();
     game = $firebaseObject(newRef);
     return game;
   };
@@ -128,6 +128,38 @@ angular.module("App")
       return ++currentRound;
     })
   };
+
+  var allSubmitted = function() {
+    return new Promise(function(resolve, reject) {
+
+      var ref = new Firebase(firebaseRef + '/games/' + game.$id);
+      var playerArr = $firebaseArray(ref.child('players'));
+      // debugger;
+      playerArr.$loaded().then(function(playerArr) {
+        for (var i = 0; i < playerArr.length; i++) {
+          if (!playerArr[i].submit) {
+            resolve(false);
+          }
+        }
+        resolve(true);
+      });
+    }); 
+  };
+
+  var setSubmit = function(playerKey) {
+    var ref = new Firebase(firebaseRef + '/games/' + game.$id);
+    ref.child('players').child(playerKey).child('submit').set(true);
+  }
+
+  var clearSubmit = function() {
+    var ref = new Firebase(firebaseRef + '/games/' + game.$id);
+    var playerArr = $firebaseArray(ref.child('players'));
+    playerArr.$loaded().then(function(playerArr) {
+      for (var i = 0; i < playerArr.length; i++) {
+        ref.child('players').child(playerArr[i].$id).child('submit').set(false);
+      }
+    });
+  }
 
   var clearAnswers = function() {
     var ref = new Firebase(firebaseRef + '/games/' + game.$id);
@@ -285,6 +317,9 @@ angular.module("App")
     resetTimeLeft: resetTimeLeft,
     incrementPlayerScore: incrementPlayerScore,
     incrementRound: incrementRound,
+    allSubmitted: allSubmitted,
+    setSubmit: setSubmit,
+    clearSubmit: clearSubmit,
     joinGame: joinGame,
     setJoin: setJoin,
     updateCurrentView: updateCurrentView
