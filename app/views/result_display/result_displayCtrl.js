@@ -15,12 +15,16 @@ angular.module("App")
 	var intQuestionPromise = $interval(function() {
 		$scope.timeLeft.$value--;
 		if ($scope.timeLeft.$value <= 0){
-			$interval.cancel(intQuestionPromise); // Cancel the interval once we're done with it.
-			fireBaseFactory.updateCurrentView('nextDisplay'); // Force client to update!
-			fireBaseFactory.resetTimeLeft();
-			$scope.toNextDisplay(); // Host view will update!
+			$scope.endResultsView();
 		}
-	},1000, fireBaseFactory.getGameTime());
+	}, 1000, fireBaseFactory.getGameTime());
+
+	$scope.endResultsView = function () {
+		$interval.cancel(intQuestionPromise); // Cancel the interval once we're done with it.
+		fireBaseFactory.updateCurrentView('nextDisplay'); // Force client to update!
+		fireBaseFactory.resetTimeLeft();
+		$scope.toNextDisplay(); // Host view will update!
+	};
 
 	// redirect to question_display
 	$scope.toNextDisplay = function() {
