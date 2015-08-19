@@ -12,7 +12,8 @@ module.exports = function(grunt) {
     clean: {
       js: ['./.public/*.js'],
       css: ['./.public/*.css'],
-      views: ['./.public/views/']
+      views: ['./.public/views/'],
+      views: ['./.public/directives/']
     },
 
     concat: {
@@ -24,6 +25,7 @@ module.exports = function(grunt) {
           './app/app.js',
           './app/fireBaseFactory.js',
           './app/views/**/*.js',
+          './app/directives/**/*.js',
         ],
         dest: './.public/production.js'
       }
@@ -50,6 +52,11 @@ module.exports = function(grunt) {
       views: {
         files: [
           {expand: true, flatten: true, src: ['./app/views/**/*.html'], dest: './.public/views/'}
+        ]
+      },
+      directives: {
+        files: [
+          {expand: true, flatten: true, src: ['./app/directives/**/*.html'], dest: './.public/directives/'}
         ]
       }
     },
