@@ -55,18 +55,12 @@ module.exports = function(grunt) {
     },
 
     shell: {
-      changeDir: {
-        command: 'pushd "./.public"'
-      },
-      pythonServer: {
+      firebase: {
+        command: 'firebase deploy',
         options: {
           stdout: true,
           stderr: true
-        },
-        command: 'python -m http.server 8080'
-      },
-      popDir: {
-        command: 'popd'
+        }
       }
     },
 
@@ -143,18 +137,19 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('upload', function(n) {
+    grunt.task.run(['build']);
     if (grunt.option('prod')) {
       //
+      grunt.task.run(['shell']);
     }
     else {
-      grunt.task.run(['build']);
       grunt.task.run(['server-dev']);
     }
   });
 
   // Grunt Tasks /////////////////////////////////////
   grunt.registerTask('deploy', [
-    // 'test',
+    'test',
     'clean',
     'upload'
   ]);
