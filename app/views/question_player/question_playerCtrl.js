@@ -35,6 +35,10 @@ angular.module('App')
       }
     },250,0);
 
+    $scope.isImagePrompt = function () {
+      return !!$scope.question.image;
+    };
+
     $scope.submitPlayerAnswer = function(answer) {
       $scope.holdView = true;
       

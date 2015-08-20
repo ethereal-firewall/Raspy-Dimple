@@ -2,6 +2,9 @@
   <div ng-show="!holdView">
     <p>Current Round: {{ currentRound }}</p>
     <p class="question">{{question.question}}</p>
+    <p class="question" ng-show="isImagePrompt()">
+      <img src="{{ question.image }}">
+    </p>
    
     <p>{{timeLeft.$value}}</p>
 
