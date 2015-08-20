@@ -31,7 +31,6 @@ angular.module("App")
     game.$loaded()
         .then(function(data) {
           $scope.answers = data.answers;
-          $scope.$apply();
         })
     }, 1500);
 
