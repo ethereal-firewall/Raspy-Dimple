@@ -263,7 +263,8 @@ angular.module("App")
     var ref = new Firebase(firebaseRef + '/games/' + game.$id + '/players');
     ref.once('value', function(players) {
       var tempPlayers = [];
-      angular.forEach(players.val(), function(player, key) {
+      players = players.val();
+      angular.forEach(players, function(player, key) {
         player.key = key;
         tempPlayers.push(player);
       });
@@ -273,6 +274,15 @@ angular.module("App")
       for (var i = 1; i <= gameOptions.endRound; i++) {
         tempQuestions[i] = questionGenerator(tempPlayers);
       };
+
+      var randomSpot = Math.random() * Math.ceil(gameOptions.endRound / 2);
+      randomSpot = Math.ceil(randomSpot);
+      randomSpot += Math.floor(gameOptions.endRound / 2);
+
+      var questionToChange = tempQuestions[randomSpot];
+      var randomPlayer = players[questionToChange.subject];
+      questionToChange.image = randomPlayer.questionPhoto;
+      questionToChange.question = 'Caption this photo!';
 
       // add ten random questions and add a random name to each one where 'JARVIS' is located
       var ref = new Firebase(firebaseRef + '/games/' + game.$id);
