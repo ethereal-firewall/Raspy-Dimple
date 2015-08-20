@@ -16,7 +16,12 @@ angular.module('App')
         // maybe remove it
         $scope.question = data.questions[data.currentRound];
         $scope.currentRound = data.currentRound;
-        $scope.timeLeft = fireBaseFactory.getTimeLeft();
+        // $scope.timeLeft = fireBaseFactory.getTimeLeft();
+        $scope.timeLeft = {};
+        fireBaseFactory.clearSubmit(playerKey);
+        fireBaseFactory.getTimer().setCallback(function(time) {
+          $scope.timeLeft.$value = time;
+        });
       });
 
     // Setting up an interval to poll Firebase and see if

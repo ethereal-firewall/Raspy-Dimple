@@ -14,7 +14,12 @@ angular.module('App')
         $scope.question = data.questions[data.currentRound];
         // get current round
         $scope.currentRound = data.currentRound;
-        fireBaseFactory.getTimeLeft().$bindTo($scope,'timeLeft');
+        //fireBaseFactory.getTimeLeft().$bindTo($scope,'timeLeft');
+        $scope.timeLeft = {};
+        fireBaseFactory.clearSubmit();
+        fireBaseFactory.getTimer().setCallback(function(time) {
+          $scope.timeLeft.$value = time;
+        });
       });
 
     // Setting up an interval to poll Firebase and see if

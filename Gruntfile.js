@@ -24,6 +24,7 @@ module.exports = function(grunt) {
         src: [
           './app/app.js',
           './app/fireBaseFactory.js',
+          './app/fireBaseTimer.js',
           './app/views/**/*.js',
           './app/directives/**/*.js',
         ],
