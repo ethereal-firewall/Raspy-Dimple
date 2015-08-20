@@ -13,7 +13,8 @@ module.exports = function(grunt) {
       js: ['./.public/*.js'],
       css: ['./.public/*.css'],
       views: ['./.public/views/'],
-      directives: ['./.public/directives/']
+      directives: ['./.public/directives/'],
+      photos: ['./.public/assets/*.jpg']
     },
 
     concat: {
@@ -58,6 +59,11 @@ module.exports = function(grunt) {
       directives: {
         files: [
           {expand: true, flatten: true, src: ['./app/directives/**/*.html'], dest: './.public/directives/'}
+        ]
+      },
+      photos: {
+        files: [
+          {expand: true, flatten: true, src: ['./app/assets/**/*.jpg'], dest: './.public/assets/'}
         ]
       }
     },
