@@ -2,33 +2,6 @@ angular.module('App')
 .factory('fireBaseTimer', function($interval) {
   var firebaseRef = 'https://exposeyourselfagain.firebaseio.com';
 
-  // ref.child('.info/serverTimeOffset').on('value', function(snap) {
-  //   offset = snap.val() || 0;
-  // });
-
-
-
-  // var updateStartTime = function(snap) {
-  //   currTime = snap.val() || 0;
-  // };
-
-  // var toggleTimer = function(snap) {
-  //   debugger;
-  //   var toggle = !! snap.val();
-  //   if (toggle) {
-  //     timer = $interval(countDown, 1000);
-  //   }
-  //   else {
-  //     timer && $interval.cancel(timer);
-  //     timer = null;
-  //   }
-  // };
-
-  // var countDown = function() {
-  //   console.log(currTime);
-  //   currTime--;
-  // };
-
   var CreateTimer = function(id) {
     var timer = {};
     var clock;
@@ -53,9 +26,6 @@ angular.module('App')
         console.log(timer.currentTime);
         callback(timer.currentTime);
         timer.currentTime--;  
-      }
-      else {
-        timer.stopTimer();
       }
     };
 
