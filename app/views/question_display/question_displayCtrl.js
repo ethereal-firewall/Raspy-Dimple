@@ -3,6 +3,7 @@ angular.module("App")
 	
 	// get game from firebase to display question
 	var game = fireBaseFactory.getGame();
+	if (game === null) $state.go('home');
 	game.$loaded().then(function(data) {
 		// get current round
 		$scope.currentRound = data.currentRound;

@@ -1,6 +1,7 @@
 angular.module('App')
   .controller('question_playerCtrl', function($scope, $state, $interval, $timeout, fireBaseFactory) {
     var game = fireBaseFactory.getGame();
+    if (game === null) $state.go('home');
     var playerKey = fireBaseFactory.getPlayerKey();
 
     // This freezes the player on their current view
