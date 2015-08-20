@@ -49,7 +49,7 @@ angular.module("App")
 
   var joinGame = function(id, name, profilePhoto, questionPhoto, callback) {
     // Convert our ID to Upper Case since that's what's created by our short code generator.
-    id.toUpperCase();
+    id = id.toUpperCase();
 
     profilePhoto = profilePhoto || '';
     questionPhoto = questionPhoto || '';
