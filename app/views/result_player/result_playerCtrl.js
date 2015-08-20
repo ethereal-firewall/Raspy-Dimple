@@ -15,6 +15,7 @@ angular.module('App')
         $scope.players = data.players;
         // $scope.timeLeft = fireBaseFactory.getTimeLeft();
         $scope.timeLeft = {};
+        fireBaseFactory.clearSubmit();
         fireBaseFactory.getTimer().setCallback(function(time) {
           $scope.timeLeft.$value = time;
         });

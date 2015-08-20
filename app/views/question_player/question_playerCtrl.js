@@ -16,7 +16,6 @@ angular.module('App')
         $scope.currentRound = data.currentRound;
         //fireBaseFactory.getTimeLeft().$bindTo($scope,'timeLeft');
         $scope.timeLeft = {};
-        fireBaseFactory.clearSubmit();
         fireBaseFactory.getTimer().setCallback(function(time) {
           $scope.timeLeft.$value = time;
         });
@@ -45,7 +44,7 @@ angular.module('App')
       var ref = new Firebase(fireBaseFactory.firebaseRef + '/games/' + game.$id);
       if ($scope.answer !== undefined){
         answer = $scope.answer;
-        ref.child('answers').child(playerKey).update({
+        ref.child('answers').child(playerKey).set({
           playerKey: playerKey,
           response: answer,
           votes: 0
