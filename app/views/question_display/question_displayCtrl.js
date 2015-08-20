@@ -45,6 +45,9 @@ angular.module("App")
 	// 	})
 	// },1000, fireBaseFactory.getGameTime());
 
+	$scope.isImagePrompt = function () {
+	  return !!$scope.question.image;
+	};
 
 	$scope.toVotingDisplay = function() {
 		fireBaseFactory.updateCurrentView('voting');
