@@ -47,19 +47,22 @@ angular.module("App")
     return game;
   };
 
-  var joinGame = function(id, name, photo) {
+  var joinGame = function(id, name, photo, callback) {
     // Convert our ID to Upper Case since that's what's created by our short code generator.
-    var id = id.toUpperCase();
+    id.toUpperCase();
 
     photo = photo || '';
     
     var newRef = new Firebase(firebaseRef + "/games/" + id);
-    playerKey = newRef.child("players").push({name: name, votes: 0, photo: photo, submit:false}).key();
-    game = $firebaseObject(newRef);
-
-    timer = fireBaseTimer.CreateTimer(id);
-
-    return game;
+    newRef.once('value', function (data) {
+      if (!data.exists()) callback(false);
+      else {
+        playerKey = newRef.child("players").push({name: name, votes: 0, photo: photo, submit:false}).key();
+        game = $firebaseObject(newRef);
+        timer = fireBaseTimer.CreateTimer(id);
+        callback(true);
+      }
+    });
   };
 
   // Check if the HOST has put the game into an active state.
