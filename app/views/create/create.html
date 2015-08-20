@@ -1,16 +1,18 @@
 <div id="create-host-view" ng-controller="createCtrl">
-  <h2>Create new game</h2>
+  <h1>Create new game</h1>
+  <p class="instruction">Join this game with the following code:</p>
 
-  <p>Join this game<br/> with the following code:</p>
-  <p id="game-code">{{code}}</p>
+  <div class="game-code">{{code}}</div>
 
-  <p>Current players:</p>
-  <div class="current-players">
-    <span ng-repeat="player in players">
-      | {{player.name}}
-    </span>
-  </div>
-  <p id="go-button">
-    <a ng-click="toQuestionDisplay()" href="#">→ → → GO! ← ← ←</a>
-  </p>
+  <h2>Current players</h2>
+  <!-- Todo: Replace with directive -->
+  <ul class="players">
+    <li ng-repeat="player in players | orderBy:'-votes'">
+      <div class="profile-photo"><img ng-src="{{ player.profilePhoto }}"></div>
+      <div class="name">{{ player.name }} <span class="votes" ng-show="player.votes">{{ player.votes }}</span></div>
+    </li>
+  </ul>
+
+  <button ng-click="toQuestionDisplay()" href="#" class="play">Play!</button>
+  
 </div>
