@@ -1,8 +1,9 @@
 angular.module("App")
-.factory("fireBaseFactory", function($firebaseObject, $firebaseArray) {
+.factory("fireBaseFactory", function($firebaseObject, $firebaseArray, fireBaseTimer) {
   var firebaseRef = 'https://exposeyourselfagain.firebaseio.com';
   var ref = new Firebase(firebaseRef + "/games");
   var game = null;
+  var timer = null;
   var playerKey = null;
   var gameOptions = {};
   gameOptions.timeLeft = 60;
@@ -40,6 +41,9 @@ angular.module("App")
     // Once we've instantiated the game, let's get the object back so we can utilize it.
     var newRef = new Firebase(firebaseRef + "/games/" + gameID);
     game = $firebaseObject(newRef);
+
+    timer = fireBaseTimer.CreateTimer(gameID);
+    console.log(timer);
     return game;
   };
 
@@ -52,6 +56,9 @@ angular.module("App")
     var newRef = new Firebase(firebaseRef + "/games/" + id);
     playerKey = newRef.child("players").push({name: name, votes: 0, photo: photo, submit:false}).key();
     game = $firebaseObject(newRef);
+
+    timer = fireBaseTimer.CreateTimer(id);
+
     return game;
   };
 
@@ -154,14 +161,9 @@ angular.module("App")
     ref.child('players').child(playerKey).child('submit').set(true);
   }
 
-  var clearSubmit = function() {
+  var clearSubmit = function(playerKey) {
     var ref = new Firebase(firebaseRef + '/games/' + game.$id);
-    var playerArr = $firebaseArray(ref.child('players'));
-    playerArr.$loaded().then(function(playerArr) {
-      for (var i = 0; i < playerArr.length; i++) {
-        ref.child('players').child(playerArr[i].$id).child('submit').set(false);
-      }
-    });
+    ref.child('players').child(playerKey).child('submit').set(false); 
   }
 
   var clearAnswers = function() {
@@ -185,8 +187,12 @@ angular.module("App")
   };
 
   var getGameTime = function() {
-    return gameOptions.timeLeft;
+    return gameOptions.timeLeft; 
   };
+
+  var getTimer = function() {
+    return timer;
+  }
 
   var getEndRound = function(){
     return gameOptions.endRound;
@@ -328,6 +334,7 @@ angular.module("App")
     getPlayerAnswers: getPlayerAnswers,
     getPlayerNames: getPlayerNames,
     getTimeLeft: getTimeLeft,
+    getTimer: getTimer,
     resetTimeLeft: resetTimeLeft,
     incrementPlayerScore: incrementPlayerScore,
     incrementRound: incrementRound,

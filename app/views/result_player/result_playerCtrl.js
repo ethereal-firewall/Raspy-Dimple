@@ -13,7 +13,11 @@ angular.module('App')
         $scope.currentRound = data.currentRound;
         $scope.endRound = data.endRound;
         $scope.players = data.players;
-        $scope.timeLeft = fireBaseFactory.getTimeLeft();
+        // $scope.timeLeft = fireBaseFactory.getTimeLeft();
+        $scope.timeLeft = {};
+        fireBaseFactory.getTimer().setCallback(function(time) {
+          $scope.timeLeft.$value = time;
+        });
       });
 
     var intPlayerVotingPromise = $interval(function() {

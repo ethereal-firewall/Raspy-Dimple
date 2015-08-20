@@ -8,19 +8,27 @@ angular.module("App")
 		$scope.currentRound = data.currentRound;
 		$scope.question = data.questions[data.currentRound];
 		playerList = data.players;
+		$scope.timeLeft = {};
 	});
 
-	fireBaseFactory.getTimeLeft().$bindTo($scope,'timeLeft');
-
-	var intQuestionPromise = $interval(function() {
-		$scope.timeLeft.$value--;
-		if ($scope.timeLeft.$value <= 0){
+	// fireBaseFactory.getTimeLeft().$bindTo($scope,'timeLeft');
+	fireBaseFactory.getTimer().startTimer(fireBaseFactory.getGameTime(), function(time) {
+		$scope.timeLeft.$value = time;
+		if ($scope.timeLeft.$value <= 0) {
 			$scope.endResultsView();
 		}
-	}, 1000, fireBaseFactory.getGameTime());
+	});
+
+	// var intQuestionPromise = $interval(function() {
+	// 	$scope.timeLeft.$value--;
+	// 	if ($scope.timeLeft.$value <= 0){
+	// 		$scope.endResultsView();
+	// 	}
+	// }, 1000, fireBaseFactory.getGameTime());
 
 	$scope.endResultsView = function () {
-		$interval.cancel(intQuestionPromise); // Cancel the interval once we're done with it.
+		//$interval.cancel(intQuestionPromise); // Cancel the interval once we're done with it.
+		fireBaseFactory.getTimer().stopTimer();
 		fireBaseFactory.updateCurrentView('nextDisplay'); // Force client to update!
 		fireBaseFactory.resetTimeLeft();
 		$scope.toNextDisplay(); // Host view will update!
