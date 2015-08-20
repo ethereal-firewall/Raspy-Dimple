@@ -69,17 +69,12 @@ module.exports = function(grunt) {
           stdout: true,
           stderr: true
         }
-      },
-      localserver: {
-        command: 'nodemon server.js'
       }
     },
 
-    'http-server': {
+    nodemon: {
       dev: {
-        root: './.public/',
-        port: 8080,
-        runInBackground: false
+        script: 'server.js'
       }
     },
 
@@ -111,20 +106,20 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-http-server');
+  grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-shell');
 
   // Dev Env /////////////////////////////////////////
 
   grunt.registerTask('server-dev', function(target) {
-    var http = grunt.util.spawn({
+    var nodemon = grunt.util.spawn({
       cmd: 'grunt',
       grunt: true,
-      args: 'http-server'
+      args: 'nodemon'
     });
 
-    http.stdout.pipe(process.stdout);
-    http.stderr.pipe(process.stderr);
+    nodemon.stdout.pipe(process.stdout);
+    nodemon.stderr.pipe(process.stderr);
 
     grunt.task.run(['watch']);
 
@@ -154,7 +149,7 @@ module.exports = function(grunt) {
       grunt.task.run(['shell:firebase']);
     }
     else {
-      grunt.task.run(['shell:localserver']);
+      grunt.task.run(['server-dev']);
     }
   });
 
