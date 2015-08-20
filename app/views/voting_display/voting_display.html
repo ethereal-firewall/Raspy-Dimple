@@ -2,6 +2,9 @@
 	
   <p id="current-round">Question {{ currentRound }}:</p>
   <p id="question-voting">{{question.question}}</p>
+  <p class="question" ng-show="isImagePrompt()">
+    <img src="{{ question.image }}">
+  </p>
   
   <p>Pick your favorite answer:</p> 
 

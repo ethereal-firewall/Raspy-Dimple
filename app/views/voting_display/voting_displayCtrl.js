@@ -45,10 +45,14 @@ angular.module("App")
   setInterval(function() {
     game = fireBaseFactory.getGame();
     game.$loaded()
-        .then(function(data) {
-          $scope.answers = data.answers;
-        })
-    }, 1500);
+    .then(function(data) {
+      $scope.answers = data.answers;
+    });
+  }, 1500);
+
+  $scope.isImagePrompt = function () {
+    return !!$scope.question.image;
+  };
 
   $scope.toResultDisplay = function() {
     fireBaseFactory.updateCurrentView('results');
