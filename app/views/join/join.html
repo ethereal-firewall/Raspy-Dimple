@@ -1,28 +1,35 @@
 <div id="join-view">
-  <h2>Join a game!</h2>
+
+  <h1>Join a game!</h1>
   <form ng-show="!holdGame">
-    <p>
-      <label>Enter code to join game:</label>
+    <label>
+      Enter code to join game
       <input ng-model='join.code'>
-    </p>
-    <p>
-      <label>Enter your name:</label>
+    </label>
+    
+    <label>
+      Enter your name
       <input ng-model='join.name'>
-      <label>Upload your face!
-        <input type="file" accept="image/*;capture=camera" fileread="join.profilePhoto">
-      </label>
-      <label>Upload a funny photo!
-        <input type="file" accept="image/*;capture=camera" fileread="join.questionPhoto">
-      </label>
-    </p>
+    </label>
+      
+    <label>
+      Upload your face!
+      <input type="file" accept="image/*;capture=camera" fileread="join.profilePhoto">
+    </label>
+
+    <label>
+      Upload a funny photo!
+      <input type="file" accept="image/*;capture=camera" fileread="join.questionPhoto">
+    </label>
+    
     <button id="join-button" name="submit" ng-click="go()">GO!</button>
+    
+    <!-- For testing purposes 
     <img src="{{ join.profilePhoto }}" class="preview-photo">
-    <img src="{{ join.questionPhoto }}" class="preview-photo">
+    <img src="{{ join.questionPhoto }}" class="preview-photo"> -->
   </form>
 
   <div class="error" ng-show="invalidGameError">{{ invalidGameError }}</div>
+  <div class="waiting" ng-show="holdGame">Waiting for other players...</div>
 
-  <div ng-show="holdGame">
-    Waiting for other players . . .
-  </div>
 </div>
