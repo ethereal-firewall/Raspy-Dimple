@@ -47,20 +47,23 @@ angular.module("App")
     return game;
   };
 
-  var joinGame = function(id, name, photo) {
+  var joinGame = function(id, name, profilePhoto, questionPhoto) {
     // Convert our ID to Upper Case since that's what's created by our short code generator.
     var id = id.toUpperCase();
 
-    photo = photo || '';
+    profilePhoto = profilePhoto || '';
+    questionPhoto = questionPhoto || '';
     
     var newRef = new Firebase(firebaseRef + "/games/" + id);
-    playerKey = newRef.child("players").push({name: name, votes: 0, photo: photo, submit:false}).key();
+    playerKey = newRef.child("players").push({name: name, votes: 0, profilePhoto: profilePhoto, questionPhoto: questionPhoto, submit:false}).key();
     game = $firebaseObject(newRef);
 
     timer = fireBaseTimer.CreateTimer(id);
 
     return game;
   };
+
+  console.log('hi');
 
   // Check if the HOST has put the game into an active state.
   // If not, force the player / client to wait on their current screen.
