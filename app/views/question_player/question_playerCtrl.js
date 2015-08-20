@@ -16,6 +16,7 @@ angular.module('App')
         $scope.currentRound = data.currentRound;
         //fireBaseFactory.getTimeLeft().$bindTo($scope,'timeLeft');
         $scope.timeLeft = {};
+        fireBaseFactory.clearSubmit(playerKey);
         fireBaseFactory.getTimer().setCallback(function(time) {
           $scope.timeLeft.$value = time;
         });
