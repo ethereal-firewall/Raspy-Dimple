@@ -47,20 +47,23 @@ angular.module("App")
     return game;
   };
 
-  var joinGame = function(id, name, profilePhoto, questionPhoto) {
+  var joinGame = function(id, name, profilePhoto, questionPhoto, callback) {
     // Convert our ID to Upper Case since that's what's created by our short code generator.
-    var id = id.toUpperCase();
+    id.toUpperCase();
 
     profilePhoto = profilePhoto || '';
     questionPhoto = questionPhoto || '';
     
     var newRef = new Firebase(firebaseRef + "/games/" + id);
-    playerKey = newRef.child("players").push({name: name, votes: 0, profilePhoto: profilePhoto, questionPhoto: questionPhoto, submit:false}).key();
-    game = $firebaseObject(newRef);
-
-    timer = fireBaseTimer.CreateTimer(id);
-
-    return game;
+    newRef.once('value', function (data) {
+      if (!data.exists()) callback(false);
+      else {
+        playerKey = newRef.child("players").push({name: name, votes: 0, profilePhoto: profilePhoto, questionPhoto: questionPhoto, submit:false}).key();
+        game = $firebaseObject(newRef);
+        timer = fireBaseTimer.CreateTimer(id);
+        callback(true);
+      }
+    });
   };
 
   console.log('hi');

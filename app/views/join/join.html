@@ -20,6 +20,8 @@
     <img src="{{ join.questionPhoto }}" class="preview-photo">
   </form>
 
+  <div class="error" ng-show="invalidGameError">{{ invalidGameError }}</div>
+
   <div ng-show="holdGame">
     Waiting for other players . . .
   </div>
