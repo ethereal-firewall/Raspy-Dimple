@@ -1,13 +1,9 @@
 <div class="host question-host-view" ng-controller="question_displayCtrl">
 
-  <p class="current-round">Question {{currentRound}}:</p>
+  <span class="current-round">{{ currentRound }}</span>
+	<span id="timer">{{timeLeft.$value}}</span>
   
-  <p class="question">{{question.question}}</p>
-  <p class="question" ng-show="isImagePrompt()">
-    <img src="{{ question.image }}">
-  </p>
+  <img src="{{ question.image }}" ng-show="isImagePrompt()">
+  <p class="question">{{ question.question }}</p>
 
-	<div class="next_timer">
-	  <span id="timer">{{timeLeft.$value}}</span>
-	</div>
 </div>
