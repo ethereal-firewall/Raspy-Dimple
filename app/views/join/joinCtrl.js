@@ -29,7 +29,7 @@ angular.module("App")
   // 
   // Once this is done, we redirect player to the question page, using $state.
   $scope.go = function() {
-    fireBaseFactory.joinGame($scope.join.code, $scope.join.name, $scope.join.photo, $scope.join.questionPhoto, function (validGame) {
+    fireBaseFactory.joinGame($scope.join.code, $scope.join.name, $scope.join.profilePhoto, $scope.join.questionPhoto, function (validGame) {
       if (validGame) {
         $scope.holdGame = true;
         $scope.invalidGameError = null;
