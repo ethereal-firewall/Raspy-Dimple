@@ -1,8 +1,10 @@
 
 <h1>Current Scores</h1>
 
-<div>
-  <div class="running-total" ng-repeat="player in players | orderBy:'-votes'">
-    &bull; {{ player.name }} : {{ player.votes }} Total Votes
-  </div>
-</div>
+<ul class="running-total">
+  <li ng-repeat="player in players | orderBy:'-votes'">
+    <div class="profile-photo"><img ng-src="{{ player.profilePhoto }}"></div>
+    <h3>{{ player.name }}</h3>
+    <span class="votes">{{ player.votes }}</span>
+  </li>
+</ul>
