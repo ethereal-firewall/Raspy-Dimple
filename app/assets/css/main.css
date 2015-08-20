@@ -15,12 +15,40 @@ html {
   max-height: 150px;
 }
 
+.running-total {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.running-total li {
+  display: inline-block;
+  text-align: center;
+  margin: 0 5px;
+}
+
+.profile-photo {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 100%;
+}
+.profile-photo img {
+  width: 100%;
+}
+
+.name {
+  padding: 0 !important;
+  font-size: 0.75em !important;
+}
+
 /*******************************************
    Global Styles
  *******************************************/
 
 body {
-  background-color: #000;
+  background-color: grey;
   color: #fff;
   font-family: 'Sigmar One', cursive;
   font-size: 5vmin;
