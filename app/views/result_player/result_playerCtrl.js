@@ -2,6 +2,8 @@ angular.module('App')
 
   .controller('result_playerCtrl', function($scope, $state, $interval, fireBaseFactory) {
     var game = fireBaseFactory.getGame();
+    if (game === null) $state.go('home');
+
     var playerKey = fireBaseFactory.getPlayerKey();
     var playerList = {}; // Store our player list.
     $scope.answers = fireBaseFactory.getPlayerAnswers();

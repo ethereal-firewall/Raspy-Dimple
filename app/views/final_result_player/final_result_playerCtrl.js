@@ -2,6 +2,7 @@ angular.module('App')
 	.controller('final_result_playerCtrl', function($scope, $state, $firebaseObject, fireBaseFactory) {
 		// get all players and compare score
 		var game = fireBaseFactory.getGame();
+		if (game === null) $state.go('home');
 		var playerKey = fireBaseFactory.getPlayerKey();
 		var currPlayer = null;
 		var highestVote = 0;

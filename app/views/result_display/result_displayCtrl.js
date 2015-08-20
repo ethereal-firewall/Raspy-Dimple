@@ -1,9 +1,11 @@
 angular.module("App")
 .controller("result_displayCtrl", function($scope, $state, $interval, fireBaseFactory) {
+	var game = fireBaseFactory.getGame();
+	if (game === null) $state.go('home');
+
 	var playerList = {};
   $scope.answers = fireBaseFactory.getPlayerAnswers();
 
-	var game = fireBaseFactory.getGame();
 	game.$loaded().then(function(data) {
 		$scope.currentRound = data.currentRound;
 		$scope.question = data.questions[data.currentRound];
