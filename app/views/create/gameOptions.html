@@ -1,5 +1,5 @@
-<div>
-  Time per Question: <input type="number" ng-model="gameOptions.timeLeft">
-  Number of Questions: <input type="number" ng-model="gameOptions.endRound">
+<div class="game-options">
+  <label>Seconds per question<input type="number" ng-model="gameOptions.timeLeft"></label>
+  <label>Number of rounds<input type="number" ng-model="gameOptions.endRound"></label>
   <button ng-click="createGame()">Create Game</button>
 </div>
