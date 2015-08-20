@@ -8,10 +8,16 @@
     <p>
       <label>Enter your name:</label>
       <input ng-model='join.name'>
-      <img src="{{ join.photo }}" class="preview-photo">
-      <input type="file" accept="image/*;capture=camera" fileread="join.photo">
+      <label>Upload your face!
+        <input type="file" accept="image/*;capture=camera" fileread="join.profilePhoto">
+      </label>
+      <label>Upload a funny photo!
+        <input type="file" accept="image/*;capture=camera" fileread="join.questionPhoto">
+      </label>
     </p>
     <button id="join-button" name="submit" ng-click="go()">GO!</button>
+    <img src="{{ join.profilePhoto }}" class="preview-photo">
+    <img src="{{ join.questionPhoto }}" class="preview-photo">
   </form>
 
   <div ng-show="holdGame">
