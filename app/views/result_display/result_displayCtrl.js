@@ -39,6 +39,7 @@ angular.module("App")
 	// redirect to question_display
 	$scope.toNextDisplay = function() {
 		if ($scope.currentRound >= fireBaseFactory.getEndRound()) {
+			fireBaseFactory.updateCurrentView('finalResults');
 			$state.go("final_result_display");
 		} else { // else display_question
 			fireBaseFactory.incrementRound();
