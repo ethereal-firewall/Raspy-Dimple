@@ -1,19 +1,20 @@
 <div class="host voting-host-view">
-	
-  <p id="current-round">Question {{ currentRound }}:</p>
-  <p id="question-voting">{{question.question}}</p>
-  <p class="question" ng-show="isImagePrompt()">
-    <img src="{{ question.image }}">
-  </p>
+
+  <!-- Todo: Replace with directive -->
+  <div class="status">
+    <span class="round">{{ currentRound }}</span>
+    <span id="timer">{{timeLeft.$value}}</span>
+  </div>
+
+  <!-- Todo: Replace with directive -->
+  <div class="questions">
+    <img src="{{ question.image }}" ng-show="isImagePrompt()">
+    <p>{{ question.question }}</p>
+  </div>
   
-  <p>Pick your favorite answer:</p> 
-
-  <div class="answers">
-    <div ng-repeat="answer in answers">&bull; {{answer.response}}</div>
-  </div>
-
-  <div class="next_timer">
-    <span class="timer">{{timeLeft.$value}}</span>
-  </div>
+  <h3>Pick your favorite answer:</h3> 
+  <ul class="answers">
+    <li ng-repeat="answer in answers">{{answer.response}}</li>
+  </ul>
 
 </div>
