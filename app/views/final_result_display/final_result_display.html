@@ -1,13 +1,7 @@
 <div class="host-final-result-view">
   <h1>Final Result</h1>
 
-  <!-- Todo: Replace with directive -->
-  <ul class="players">
-    <li ng-repeat="player in players | orderBy:'-votes'">
-      <div class="profile-photo"><img ng-src="{{ player.profilePhoto }}"></div>
-      <div class="name">{{ player.name }} <span class="votes" ng-show="player.votes">{{ player.votes }}</span></div>
-    </li>
-  </ul>
+  <players></players>
 
   <button type="button" ng-click="toHome()">Play Another Game</button>
   
