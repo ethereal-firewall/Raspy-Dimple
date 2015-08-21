@@ -22,6 +22,7 @@ angular.module("App")
   // $scope.join.name = the player's name.
   $scope.join = {};
   $scope.holdGame = false; // Intial base condition, set to true.
+  $scope.submitted = false;
 
   // This function is called when the "GO!" button is clicked in the join view.
   // First, we call the joinGame() method from the fireBaseFactory and pass
@@ -29,7 +30,9 @@ angular.module("App")
   // 
   // Once this is done, we redirect player to the question page, using $state.
   $scope.go = function() {
+    $scope.submitted = true;
     fireBaseFactory.joinGame($scope.join.code, $scope.join.name, $scope.join.profilePhoto, $scope.join.questionPhoto, function (validGame) {
+      $scope.submitted = false;
       if (validGame) {
         $scope.holdGame = true;
         $scope.invalidGameError = null;
