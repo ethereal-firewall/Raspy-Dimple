@@ -281,6 +281,25 @@ angular.module("App")
     };
   };
 
+  var addImagePrompt = function (questions, players) {
+    players = players.filter(function (player) {
+      return !!player.questionPhoto;
+    });
+
+    if (players.length > 0) {
+      var randomQuestion = Math.random() * Math.ceil(gameOptions.endRound / 2);
+      randomQuestion = Math.ceil(randomQuestion);
+      randomQuestion += Math.floor(gameOptions.endRound / 2);
+
+      var questionToChange = questions[randomQuestion];
+      var randomPlayer = Math.floor(Math.random() * players.length);
+      randomPlayer = players[randomPlayer];
+      questionToChange.subject = randomPlayer.key;
+      questionToChange.image = randomPlayer.questionPhoto;
+      questionToChange.question = 'Caption this photo!';
+    }
+  };
+
   var addQuestions = function(callback) {
 
     // get access to the names for the current game
@@ -299,14 +318,7 @@ angular.module("App")
         tempQuestions[i] = questionGenerator(tempPlayers);
       }
 
-      var randomSpot = Math.random() * Math.ceil(gameOptions.endRound / 2);
-      randomSpot = Math.ceil(randomSpot);
-      randomSpot += Math.floor(gameOptions.endRound / 2);
-
-      var questionToChange = tempQuestions[randomSpot];
-      var randomPlayer = players[questionToChange.subject];
-      questionToChange.image = randomPlayer.questionPhoto;
-      questionToChange.question = 'Caption this photo!';
+      addImagePrompt(tempQuestions, tempPlayers);
 
       // add ten random questions and add a random name to each one where 'JARVIS' is located
       var ref = new Firebase(firebaseRef + '/games/' + game.$id);
