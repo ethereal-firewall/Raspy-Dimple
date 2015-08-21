@@ -31,7 +31,6 @@ blockquote {
   } 
 }
 
-
 q {
   &:before, &:after {
     content: '';
@@ -47,7 +46,6 @@ table {
 *, *:before, *:after {
   box-sizing: border-box;
 }
-
 
 input, button {
   -webkit-appearance: none;
@@ -145,20 +143,35 @@ button {
 }
 
 input {
-  width: 10rem;
+  width: 14rem;
   text-align: center;
   background: $alt;
   color: $dark;
   padding: 1rem;
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
-      /* display: none; <- Crashes Chrome on hover */
-      -webkit-appearance: none;
-      margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    -webkit-appearance: none;
+    margin: 0; // Apparently some margin are still there even though it's hidden
   }
   &.short {
     width: 5rem;
   }
+}
+
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: $light;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color: $light;
+   opacity: 1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color: $light;
+   opacity: 1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color: $light;
 }
 
 
