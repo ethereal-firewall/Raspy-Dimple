@@ -283,6 +283,26 @@ color: aqua;
 margin-bottom: 6vh;
 }
 
+.results-host-view .animateTest.ng-enter {
+  -webkit-transition: 0.5s linear all;
+  transition: 0.5s linear all;
+  opacity: 0;
+}
+
+.results-host-view .animateTest.ng-enter.ng-enter-active {
+  opacity: 1;
+}
+
+.results-host-view .voters.ng-enter {
+  -webkit-transition: 0.5s linear all;
+  transition: 0.5s linear all;
+  opacity: 0;
+}
+
+.results-host-view .voters.ng-enter.ng-enter-active {
+  opacity: 1;
+}
+
 /*******************************************
    Host Final Result view
  *******************************************/

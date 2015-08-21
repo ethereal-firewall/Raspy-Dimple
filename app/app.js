@@ -1,4 +1,4 @@
-angular.module("App", ["ui.router", "firebase"])
+angular.module("App", ["ui.router", "firebase", 'ngAnimate'])
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state("home", {

@@ -13,8 +13,8 @@ angular.module('App')
 				var players = data.players;
 
 				angular.forEach(players, function(player) {
-					if (player.votes > highestVote) {
-						highestVote = player.votes;
+					if (player.score > highestVote) {
+						highestVote = player.score;
 						winner = player.name;
 					}
 				});

@@ -5,11 +5,25 @@
   <h1>VOTING RESULTS!</h1>
 
 	<div class="results">
-	  <div class="each" ng-repeat="answer in answers | orderBy:'-votes'">
-	    &bull; {{getPlayerName(answer.playerKey)}}: {{answer.votes}} Votes
-	    <br>
-	    {{answer.response}}
-	  </div>
+    {{question.question}}
+    <div class="each animateTest" ng-repeat="answer in answers | orderBy:'-votes'">
+      <!-- &bull; {{getPlayerName(answer.playerKey)}}: {{answer.votes}} Votes
+      <br>
+      {{answer.response}} -->
+      <div class="answer"> {{answer.response}} </div>
+
+      <div class="voters" ng-repeat="(voter, value) in answer.voters"> 
+        <div>
+          <div class="profile-photo"><img ng-src="{{ getPlayer(voter).profilePhoto === '' ? './assets/default-profile.jpg' : getPlayer(voter).profilePhoto }}"></div>
+          <div>{{getPlayerName(voter)}}</div> 
+        </div>
+      </div>
+
+      <div class="owner" ng-show="owner"> {{getPlayerName(answer.playerKey)}}'s Answer </div>
+      <div class="ownerScore" ng-show="ownerScore"> {{getPlayerName(answer.playerKey)}} gets {{answer.points}} points!!!</div>
+
+    </div>
+    <div class="trueAnswer" ng-show="trueShow"> Correct Answer </div>
 	</div>
 
   <div class="next_timer">
