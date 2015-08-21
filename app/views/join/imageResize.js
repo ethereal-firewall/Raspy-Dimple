@@ -1,6 +1,6 @@
 angular.module('App')
   .directive('image', function($q) {
-    'use strict'
+    'use strict';
 
     var URL = window.URL || window.webkitURL;
 
@@ -17,7 +17,7 @@ angular.module('App')
       }
 
       return resizeArea;
-    }
+    };
 
     var resizeImage = function (origImage, options) {
       var maxHeight = options.resizeMaxHeight || 300;

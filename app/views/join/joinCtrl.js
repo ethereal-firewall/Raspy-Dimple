@@ -48,5 +48,5 @@ angular.module("App")
         $scope.invalidGameError = "This game code does not exist.";
       }
     });
-  }
+  };
 });

@@ -7,4 +7,5 @@ angular.module("App")
       game.$remove();
 			$state.go("home");
 		};
-	})
+	});
+  

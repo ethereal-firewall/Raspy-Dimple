@@ -23,7 +23,6 @@ angular.module('App')
         $scope.timeLeft.$value = time;
       });
       currentView.on('value', function (data) {
-        console.log('view changed from results');
         if (data.val() === 'finalResults') {
           $state.go('final_result_player');
           currentView.off();
@@ -42,16 +41,5 @@ angular.module('App')
         $state.go('question_player');
       }
     };
-
-    // Setting up an interval to poll Firebase and see if
-    // we can automatically change views yet.
-    // Store interval promise so that we can destroy it once we're done.
-    // var intPlayerResultPromise = $interval(function() {
-    //   $scope.curView = fireBaseFactory.getCurrentView();
-    //   if ($scope.curView === 'question'){
-    //     $interval.cancel(intPlayerResultPromise); // Destroy our interval, now that we no longer need it.
-    //     $state.go('question_player');
-    //   }
-    // },250,0);
 
   });

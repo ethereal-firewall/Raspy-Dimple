@@ -12,10 +12,8 @@ angular.module("App")
 		$scope.question = data.questions[data.currentRound];
 		playerList = data.players;
 		$scope.timeLeft = {};
-		// console.log(playerAnswers);
 	});
 
-	// fireBaseFactory.getTimeLeft().$bindTo($scope,'timeLeft');
 	fireBaseFactory.getTimer().startTimer(fireBaseFactory.getGameTime(), function(time) {
 		$scope.timeLeft.$value = time;
 		if (time === fireBaseFactory.getGameTime() || time % 5 === 0) {
@@ -28,16 +26,9 @@ angular.module("App")
 		}
 	});
 
-	// var intQuestionPromise = $interval(function() {
-	// 	$scope.timeLeft.$value--;
-	// 	if ($scope.timeLeft.$value <= 0){
-	// 		$scope.endResultsView();
-	// 	}
-	// }, 1000, fireBaseFactory.getGameTime());
 	$scope.calculatePoints = function(answer) {
 		answer.points = 0;
 		for (var vote in answer.voters){
-			console.log("Calculated Vote: ", vote);
 			if (answer.playerKey === $scope.question.subject) {
 				answer.points = 1000;
 				fireBaseFactory.addScoreToPlayer(vote, 1000);
@@ -47,12 +38,12 @@ angular.module("App")
 				fireBaseFactory.addScoreToPlayer(answer.playerKey, 500);
 			}
 		}
-		console.log("New Answer: ", answer);
 	};
 
 	$scope.addResult = function() {
+		var holder;
 		if (playerAnswers.length > 1) {
-			var holder = playerAnswers.pop();
+			holder = playerAnswers.pop();
 			if (holder.playerKey === $scope.question.subject) {
 				playerAnswers.unshift(holder);
 				$scope.addResult();
@@ -64,7 +55,7 @@ angular.module("App")
 			}
 		}
 		else if (playerAnswers.length === 1) {
-			var holder = playerAnswers.pop();
+			holder = playerAnswers.pop();
 			$scope.answers.pop();
 			$scope.calculatePoints(holder);
 			$scope.answers.push(holder);
@@ -99,5 +90,5 @@ angular.module("App")
 
 	$scope.getPlayer = function(playerKey) {
 		return playerList[playerKey];
-	}
+	};
 });
