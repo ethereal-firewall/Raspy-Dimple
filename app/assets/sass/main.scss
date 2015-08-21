@@ -74,13 +74,13 @@ p {
 html, body {
   width: 100%;
   height: 100%;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 // Media queries
 @media screen and (max-height: 720px) {
   html, body {
-    font-size: 15px;
+    font-size: 13px;
   }
 }
 @media screen and (min-width: 640px) {
@@ -230,9 +230,13 @@ input[type='file'] {
 
 .players {
   text-align: center;
+  .name {
+    position: absolute;
+  }
   li {
     width: 8rem;
     display: inline-block;
+    margin: 0 1rem;
   }
   .profile-photo {
     border-radius: 100%;
@@ -268,7 +272,7 @@ input[type='file'] {
 }
 
 .answers {
-  margin-bottom: 2rem;
+  margin: 0 1rem 2rem;
   li {
     padding: 1rem;
     background: $light;
