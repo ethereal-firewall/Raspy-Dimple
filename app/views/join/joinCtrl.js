@@ -32,6 +32,7 @@ angular.module("App")
   $scope.go = function() {
     $scope.submitted = true;
     fireBaseFactory.joinGame($scope.join.code, $scope.join.name, $scope.join.profilePhoto, $scope.join.questionPhoto, function (validGame) {
+      $scope.submitted = false;
       if (validGame) {
         $scope.holdGame = true;
         $scope.invalidGameError = null;
