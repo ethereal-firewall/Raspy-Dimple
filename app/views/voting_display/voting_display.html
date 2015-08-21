@@ -7,12 +7,12 @@
   </div>
 
   <!-- Todo: Replace with directive -->
-  <div class="questions">
+  <div class="question">
     <img src="{{ question.image }}" ng-show="isImagePrompt()">
     <p>{{ question.question }}</p>
   </div>
   
-  <h3>Pick your favorite answer:</h3> 
+  <h3>Pick your favorite!</h3> 
   <ul class="answers">
     <li ng-repeat="answer in answers">{{answer.response}}</li>
   </ul>
