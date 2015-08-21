@@ -53,7 +53,7 @@ angular.module('App')
         ref.child('answers').child(playerKey).set({
           playerKey: playerKey,
           response: answer,
-          votes: 0
+          votes: 0,
         });
         fireBaseFactory.setSubmit(playerKey); 
       }

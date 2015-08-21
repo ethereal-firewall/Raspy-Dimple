@@ -69,6 +69,7 @@ angular.module("App")
         playerKey = newRef.child("players").push({
           name: name,
           votes: 0,
+          score: 0,
           profilePhoto: profilePhoto,
           questionPhoto: questionPhoto,
           submit:false
@@ -79,6 +80,7 @@ angular.module("App")
         callback(true);
       }
     });
+
   };
 
   console.log('hi');
@@ -156,6 +158,18 @@ angular.module("App")
     ref.child('currentRound').transaction(function(currentRound) {
       return ++currentRound;
     })
+  };
+
+  var addVoteToAnswer = function(playerKey, answerPlayerKey) {
+    var ref = new Firebase(firebaseRef + '/games/' + game.$id);
+    ref.child('answers').child(answerPlayerKey).child('voters').child(playerKey).set(playerKey);
+  };
+
+  var addScoreToPlayer = function(playerKey, points) {
+    var ref = new Firebase(firebaseRef + '/games/' + game.$id);
+    ref.child('players').child(playerKey).child('score').transaction(function(score) {
+      return score + points;
+    });
   };
 
   var allSubmitted = function() {
@@ -372,6 +386,8 @@ angular.module("App")
     clearSubmit: clearSubmit,
     joinGame: joinGame,
     setJoin: setJoin,
-    updateCurrentView: updateCurrentView
+    updateCurrentView: updateCurrentView,
+    addVoteToAnswer: addVoteToAnswer,
+    addScoreToPlayer: addScoreToPlayer
   };
 });
