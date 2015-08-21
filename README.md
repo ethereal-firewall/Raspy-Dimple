@@ -17,5 +17,5 @@ We used the following in our tech stack:
 
 ## Useful links
 
-* [Style Guide](https://github.com/ethereal-firewall/Raspy-Dimple/_STYLE-GUIDE.md)
-* [How to contribute to project](https://github.com/ethereal-firewall/Raspy-Dimple/_CONTRIBUTING.md)
+* [Style Guide](https://github.com/ethereal-firewall/Raspy-Dimple/blob/master/_STYLE-GUIDE.md)
+* [How to contribute to project](https://github.com/ethereal-firewall/Raspy-Dimple/blob/master/_CONTRIBUTING.md)
