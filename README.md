@@ -1,13 +1,12 @@
 ExposeYourself
 =========
 
-ExposeYourself is an online multiplayer trivia game. This is the repository
-for hosting the game.
+ExposeYourself is an online multiplayer game. This is the repository for hosting the game.
 
 
 ## How to play
 
-Go to the [website](https://exposeyourself.firebaseapp.com), set up a game on the laptop, and have people join the game through their mobile devices with the code.
+Go to the [website](https://exposeyourselfagain.firebaseapp.com), set up a game on the laptop, and have people join the game through their mobile devices with the code.
 
 
 ## Tech Stack
@@ -18,8 +17,5 @@ We used the following in our tech stack:
 
 ## Useful links
 
-* [Style Guide](https://github.com/Raspy-Dimple/Raspy-Dimple/blob/master/_STYLE-GUIDE.md)
-* [How to contribute to project](https://github.com/Raspy-Dimple/Raspy-Dimple/blob/master/_CONTRIBUTING.md)
-* [Press Release](https://github.com/Raspy-Dimple/Raspy-Dimple/blob/master/_CONTRIBUTING.md)
-
-### Raspy-Dimple, LLC ###
+* [Style Guide](https://github.com/ethereal-firewall/Raspy-Dimple/blob/master/_STYLE-GUIDE.md)
+* [How to contribute to project](https://github.com/ethereal-firewall/Raspy-Dimple/blob/master/_CONTRIBUTING.md)
