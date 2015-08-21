@@ -4,7 +4,9 @@
   "description": "",
   "main": "app/app.js",
   "scripts": {},
-  "dependencies": {},
+  "dependencies": {
+    "grunt-sass": "^1.0.0"
+  },
   "devDependencies": {
     "express": "^4.13.3",
     "grunt": "^0.4.5",
