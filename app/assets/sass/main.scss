@@ -63,6 +63,7 @@ input, button {
 // Variables
 $splash: #F92672;
 $alt: #66D9EF;
+$action: #A6E22E;
 
 $dark: #272822;
 $light: #FFFFFF;
@@ -141,7 +142,9 @@ label {
     margin: -1rem 0 -1rem 1rem;
   }
   &.clickable {
-    background: $splash;
+    background: $light;
+    color: $splash;
+    font-weight: 700;
     &:hover {
       background: $alt;
     }
@@ -230,13 +233,11 @@ input[type='file'] {
 
 .players {
   text-align: center;
-  .name {
-    position: absolute;
-  }
   li {
     width: 8rem;
     display: inline-block;
-    margin: 0 1rem;
+    margin: 0 0.5rem;
+    text-align: center;
   }
   .profile-photo {
     border-radius: 100%;
@@ -246,6 +247,11 @@ input[type='file'] {
   }
   .name {
     font-size: 1.5rem;
+    white-space: nowrap;
+  }
+  .votes {
+    color: $splash;
+    font-weight: 900;
   }
 }
 

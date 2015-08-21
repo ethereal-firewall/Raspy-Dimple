@@ -27,7 +27,9 @@
 
     </label>
     
-    <button id="join-button" name="submit" ng-click="go()" ng-disabled="submitted">Play Now!</button>
+
+    <button id="join-button" name="submit" ng-click="go()" onClick="document.getElementById('join-button').disabled = true;">Play Now!</button>
+
     
     <!-- For testing purposes 
     <img src="{{ join.profilePhoto }}" class="preview-photo">
