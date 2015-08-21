@@ -3,16 +3,17 @@
   <h1>Join a game!</h1>
   <form ng-show="!holdGame">
     <label>
-      Enter code to join game
-      <input ng-model='join.code'>
+      Join Code
+      <input ng-model='join.code' placeholder="XXXX">
     </label>
     
     <label>
-      Enter your name
-      <input ng-model='join.name'>
+      Your Name
+      <input ng-model='join.name' placeholder="Martha">
     </label>
       
     <label>
+    
       Upload your face!
       <!-- <input type="file" accept="image/*;capture=camera" fileread="join.profilePhoto"> -->
       <input type="file" accept="image/*;capture=camera" image="join.profilePhoto" resize-max-height="200" resize-max-width="200" resize-type="image/jpg" resize-quality="0.4">
@@ -24,9 +25,10 @@
       Upload a funny photo!
       <input type="file" accept="image/*;capture=camera" image="join.questionPhoto" resize-max-height="400" resize-max-width="400" resize-type="image/jpg" resize-quality="0.4">
       <!-- <input type="file" accept="image/*;capture=camera" fileread="join.questionPhoto"> -->
+
     </label>
     
-    <button id="join-button" name="submit" ng-click="go()">GO!</button>
+    <button id="join-button" name="submit" ng-click="go()">Play Now!</button>
     
     <!-- For testing purposes 
     <img src="{{ join.profilePhoto }}" class="preview-photo">

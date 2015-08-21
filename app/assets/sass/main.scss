@@ -1,1 +1,213 @@
-/* Nothing here yet... */
+// Reset
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block; 
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none; 
+}
+
+blockquote {
+  &:before, &:after {
+    content: '';
+    content: none; 
+  } 
+}
+
+q {
+  &:before, &:after {
+    content: '';
+    content: none; 
+  } 
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; 
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+input, button {
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+  border: none;
+}
+
+.main-container {
+  width: 100%;
+  position: absolute;
+  bottom: 2rem;
+}
+
+// Variables
+$splash: #F92672;
+$alt: #66D9EF;
+
+$dark: #272822;
+$light: #FFFFFF;
+
+
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font-size: 20px;
+}
+
+// Media queries
+@media screen and (max-height: 720px) {
+  html, body {
+    font-size: 15px;
+  }
+}
+@media screen and (max-width: 640px) {
+  html, body {
+    font-size: 15px;
+  }
+}
+@media screen and (max-width: 480px) {
+  html, body {
+    font-size: 10px;
+  }
+}
+
+// Setting default font/size
+body, input, button {
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+body {
+  // display: flex;
+  // align-items: bottom;
+  text-align: center;
+  background: $dark;
+  color: $light;
+}
+
+h1{
+  font-weight: 700;
+  font-size: 6rem;
+  padding: 2rem;
+  sup {
+    font-size: 0.5em;
+    margin-top: -20px;
+    position: absolute;
+  }
+}
+
+label {
+  display: block;
+  background: fade-out($dark, 0.5);
+  margin-bottom: 1rem;
+  padding: 1rem;
+  input {
+    margin: -1rem 0 -1rem 1rem;
+  }
+}
+
+input, button, label{ 
+  font-size: 2rem;
+  border-radius: 2px;
+}
+
+button {
+  background: $splash;
+  padding: 1rem;
+  margin: 0 0.5rem;
+  &:hover {
+    background: $dark;
+    color: $light;
+  }
+}
+
+input {
+  width: 14rem;
+  text-align: center;
+  background: $alt;
+  color: $dark;
+  padding: 1rem;
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; // Apparently some margin are still there even though it's hidden
+  }
+  &.short {
+    width: 5rem;
+  }
+}
+
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: $light;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color: $light;
+   opacity: 1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color: $light;
+   opacity: 1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color: $light;
+}
+
+
+input[type='file'] {
+  display: none;
+}
+
+.game-code {
+  font-size: 8em;
+  background: $splash;
+  padding: 1rem;
+  opacity: 0.8;
+}
+
+#video-bg {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  background: url(polina.jpg) no-repeat;
+  background-size: cover;
+  opacity: 0.6;
+}
+
+.players {
+  .profile-photo img {
+    width: 8rem;
+    border-radius: 100%;
+  }
+}
+
+
+
