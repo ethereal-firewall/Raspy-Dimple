@@ -57,11 +57,13 @@ input, button {
 
 .main-container {
   width: 100%;
+  position: absolute;
+  bottom: 2rem;
 }
 
 // Variables
 $splash: #F92672;
-$alt: #D8D7C3;
+$alt: #66D9EF;
 
 $dark: #272822;
 $light: #FFFFFF;
@@ -74,6 +76,18 @@ html, body {
   font-size: 20px;
 }
 
+@media screen and (max-width: 640px) {
+  html, body {
+    font-size: 15px;
+  }
+}
+@media screen and (max-width: 480px) {
+  html, body {
+    font-size: 10px;
+  }
+}
+
+
 // Setting default font/size
 body, input, button {
   font-family: 'Lato', sans-serif;
@@ -82,8 +96,8 @@ body, input, button {
 }
 
 body {
-  display: flex;
-  align-items: center;
+  // display: flex;
+  // align-items: bottom;
   text-align: center;
   background: $dark;
   color: $light;
@@ -128,7 +142,7 @@ button {
 input {
   width: 10rem;
   text-align: center;
-  background: $dark;
+  background: $alt;
   color: $light;
   padding: 1rem;
   &::-webkit-outer-spin-button,
@@ -169,5 +183,6 @@ input[type='file'] {
   background-size: cover;
   opacity: 0.6;
 }
+
 
 
