@@ -61,7 +61,6 @@ angular.module("App")
         playerKey = newRef.child("players").push({name: name, votes: 0, profilePhoto: profilePhoto, questionPhoto: questionPhoto, submit:false}).key();
         game = $firebaseObject(newRef);
         timer = fireBaseTimer.CreateTimer(id);
-        game = $firebaseObject(newRef);
         callback(true);
       }
     });
