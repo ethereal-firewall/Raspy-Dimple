@@ -41,6 +41,7 @@ angular.module("App")
     // Once we've instantiated the game, let's get the object back so we can utilize it.
     var newRef = new Firebase(firebaseRef + "/games/" + gameID);
     game = $firebaseObject(newRef);
+    newRef.onDisconnect().remove();
 
     timer = fireBaseTimer.CreateTimer(gameID);
     console.log(timer);
@@ -58,7 +59,14 @@ angular.module("App")
     newRef.once('value', function (data) {
       if (!data.exists()) callback(false);
       else {
-        playerKey = newRef.child("players").push({name: name, votes: 0, profilePhoto: profilePhoto, questionPhoto: questionPhoto, submit:false}).key();
+        playerKey = newRef.child("players").push({
+          name: name,
+          votes: 0,
+          profilePhoto: profilePhoto,
+          questionPhoto: questionPhoto,
+          submit:false
+        }).key();
+        newRef.child('players').child(playerKey).onDisconnect().remove();
         game = $firebaseObject(newRef);
         timer = fireBaseTimer.CreateTimer(id);
         callback(true);
