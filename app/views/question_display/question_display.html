@@ -1,13 +1,15 @@
 <div class="host question-host-view" ng-controller="question_displayCtrl">
 
-  <p class="current-round">Question {{currentRound}}:</p>
-  
-  <p class="question">{{question.question}}</p>
-  <p class="question" ng-show="isImagePrompt()">
-    <img src="{{ question.image }}">
-  </p>
+  <!-- Todo: Replace with directive -->
+  <div class="status">
+    <span class="round">{{ currentRound }}</span>
+    <span id="timer">{{timeLeft.$value}}</span>
+  </div>
 
-	<div class="next_timer">
-	  <span id="timer">{{timeLeft.$value}}</span>
-	</div>
+  <!-- Todo: Replace with directive -->
+  <div class="question">
+    <img src="{{ question.image }}" ng-show="isImagePrompt()">
+    <p>{{ question.question }}</p>
+  </div>
+
 </div>
