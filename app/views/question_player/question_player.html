@@ -1,17 +1,9 @@
 <div class="question-player-view">
   <div ng-show="!holdView">
 
-    <!-- Todo: Replace with directive -->
-    <div class="status">
-      <span class="round">{{ currentRound }}</span>
-      <span id="timer">{{timeLeft.$value}}</span>
-    </div>
+    <timer></timer>
 
-    <!-- Todo: Replace with directive -->
-    <div class="question">
-      <img src="{{ question.image }}" ng-show="isImagePrompt()">
-      <p>{{ question.question }}</p>
-    </div>
+    <question></question>
 
     <form ng-submit="submitPlayerAnswer(answer)">
       <input ng-model="answer" type="textarea"/>

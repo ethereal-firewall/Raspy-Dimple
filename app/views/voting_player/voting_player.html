@@ -1,17 +1,9 @@
 <div class="voting-player-view">
   <div ng-show="!holdView">
 
-    <!-- Todo: Replace with directive -->
-    <div class="status">
-      <span class="round">{{ currentRound }}</span>
-      <span id="timer">{{timeLeft.$value}}</span>
-    </div>
+    <timer></timer>
 
-    <!-- Todo: Replace with directive -->
-    <div class="question">
-      <img src="{{ question.image }}" ng-show="isImagePrompt()">
-      <p>{{ question.question }}</p>
-    </div>
+    <question></question>
 
     <h3>Pick your favorite!</h3>
     <ul class="answers">
@@ -22,6 +14,5 @@
 
   </div>
   
-  <!-- Todo: Replace with directive -->
-  <div class="waiting" ng-show="holdView">Waiting for other players to vote...</div>
+  <waiting></waiting>
 </div>
