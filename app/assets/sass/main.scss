@@ -49,38 +49,90 @@ table {
 }
 
 
-input {
+input, button {
   -webkit-appearance: none;
   -webkit-border-radius: 0;
+  border: none;
 }
 
+.main-container {
+  width: 100%;
+}
 
 // Variables
-$dark: #231A31;
-$primary: #E42F45;
-$secondary: #B42B3F;
-$tertiary: #8AB2FF;
+$splash: #F92672;
+
+
+$dark: #0E2E3B;
+$primary: #166678;
+$tertiary: #D8D7C3;
 $light: #FFFFFF;
 
 
 html, body {
   width: 100%;
   height: 100%;
+  font-size: 20px;
+}
+
+// Setting default font/size
+body, input, button {
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+  text-transform: uppercase;
 }
 
 body {
   display: flex;
   align-items: center;
   text-align: center;
-  font-family: 'Lato', sans-serif;
-  font-size: 10vh;
   background: $primary;
   color: $light;
 }
 
 h1{
-  color: $dark;
   font-weight: 700;
+  font-size: 6em;
+  padding: 2rem;
+}
+
+
+label {
+  display: block;
+  background: darken($primary, 10%);
+}
+
+input, button, label{ 
+  font-size: 2em; 
+}
+
+button {
+  background: $tertiary;
+}
+
+input[type='file'] {
+  display: none;
+}
+
+.game-code {
+  font-size: 8em;
+  color: $splash;
+}
+
+#video-bg {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  background: url(polina.jpg) no-repeat;
+  background-size: cover;
+  opacity: 0.6;
 }
 
 
