@@ -33,6 +33,17 @@ module.exports = function(grunt) {
       }
     },
 
+    sass: {
+      dist: {
+        options: {
+          sourceMap: true,
+        },
+        files: {
+          './.public/sassy.css': './app/assets/sass/main.scss',
+        }
+      }
+    },
+
     cssmin: {
       options: {
         shorthandCompacting: false,
@@ -106,6 +117,7 @@ module.exports = function(grunt) {
 
   // Load the plugins //////////////////////////////////////////
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
@@ -136,6 +148,7 @@ module.exports = function(grunt) {
   grunt.registerTask('build', function(n) {
 
     grunt.task.run(['concat']);
+    grunt.task.run(['sass']);
     grunt.task.run(['cssmin']);
     grunt.task.run(['copy']);
     if (grunt.option('prod')) {
@@ -163,7 +176,7 @@ module.exports = function(grunt) {
   grunt.registerTask('deploy', [
     'test',
     'clean',
-    'upload'
+    'upload',
   ]);
 
 };
