@@ -52,8 +52,15 @@ angular.module("App")
     // Convert our ID to Upper Case since that's what's created by our short code generator.
     id = id.toUpperCase();
 
-    profilePhoto = profilePhoto || '';
-    questionPhoto = questionPhoto || '';
+    if (profilePhoto )
+      profilePhoto = profilePhoto.resized.dataURL;
+    else
+      profilePhoto = '';
+
+    if (questionPhoto)
+      questionPhoto = questionPhoto.resized.dataURL;
+    else
+      questionPhoto = '';
     
     var newRef = new Firebase(firebaseRef + "/games/" + id);
     newRef.once('value', function (data) {
