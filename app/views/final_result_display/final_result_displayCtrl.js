@@ -4,6 +4,7 @@ angular.module("App")
     if (game === null) $state.go('home');
 		$scope.players = fireBaseFactory.getPlayerNames();
 		$scope.toHome = function() {
+      game.$remove();
 			$state.go("home");
 		};
 	})
