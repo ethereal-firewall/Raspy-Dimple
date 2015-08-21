@@ -23,16 +23,14 @@ angular.module('App')
 
     var countDown = function() {
       if (timer.currentTime >= 0) {
-        console.log(timer.currentTime);
         callback(timer.currentTime);
         timer.currentTime--;  
       }
     };
 
     var updateStartTime = function(snap) {
-      console.log('Updated');
       timer.currentTime = snap.val() || 0;
-    }
+    };
 
     timer.game.child('timer').child('run').set(false);
     timer.game.child('timer').child('startTime').set(0);
@@ -41,7 +39,6 @@ angular.module('App')
     
     timer.startTimer = function(val, cb) {
       timer.game.child('timer').child('startTime').set(val);
-      console.log("Started Timer at: ",timer.currentTimer);
       timer.currentTimer = val;
       callback = cb;
       timer.game.child('timer').child('run').set(true);
@@ -52,7 +49,7 @@ angular.module('App')
     };
     timer.setCallback = function(cb) {
       callback = cb;
-    }
+    };
 
     return timer;
   };

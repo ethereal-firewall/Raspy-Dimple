@@ -26,7 +26,6 @@ angular.module('App')
         $scope.timeLeft.$value = time;
       });
       currentView.on('value', function (data) {
-        console.log('view changed from voting');
         if (data.val() === 'results') {
           $state.go('result_player');
           currentView.off();

@@ -44,7 +44,6 @@ angular.module("App")
     newRef.onDisconnect().remove();
 
     timer = fireBaseTimer.CreateTimer(gameID);
-    console.log(timer);
     return game;
   };
 
@@ -83,13 +82,11 @@ angular.module("App")
 
   };
 
-  console.log('hi');
-
   // Check if the HOST has put the game into an active state.
   // If not, force the player / client to wait on their current screen.
   var checkActive = function(id) {
     if (id === undefined) { return; } // Prevent errors if ID is null.
-    var id = id.toUpperCase();
+    id = id.toUpperCase();
     var activeGame;
 
     // Query our current game ID to find out if the game is in an active state.
@@ -113,14 +110,14 @@ angular.module("App")
     // // Return the state of our game to the controller.
     // // return curView;    
     // return $firebaseObject(curView);
-  }
+  };
 
   var updateCurrentView = function(view) {
     // Query game to find out if the game is in an active state.
     // This query method can be found here: https://www.firebase.com/blog/2013-10-01-queries-part-one.html#byid
     var ref = new Firebase(firebaseRef + "/games/" + game.$id);
     ref.update({currentView: view});
-  }
+  };
 
   var getGame = function() {
     return game;
@@ -157,7 +154,7 @@ angular.module("App")
     var ref = new Firebase(firebaseRef + '/games/' + game.$id);
     ref.child('currentRound').transaction(function(currentRound) {
       return ++currentRound;
-    })
+    });
   };
 
   var addVoteToAnswer = function(playerKey, answerPlayerKey) {
@@ -192,12 +189,12 @@ angular.module("App")
   var setSubmit = function(playerKey) {
     var ref = new Firebase(firebaseRef + '/games/' + game.$id);
     ref.child('players').child(playerKey).child('submit').set(true);
-  }
+  };
 
   var clearSubmit = function(playerKey) {
     var ref = new Firebase(firebaseRef + '/games/' + game.$id);
     ref.child('players').child(playerKey).child('submit').set(false); 
-  }
+  };
 
   var clearAnswers = function() {
     var ref = new Firebase(firebaseRef + '/games/' + game.$id);
@@ -225,7 +222,7 @@ angular.module("App")
 
   var getTimer = function() {
     return timer;
-  }
+  };
 
   var getEndRound = function(){
     return gameOptions.endRound;
@@ -300,7 +297,7 @@ angular.module("App")
 
       for (var i = 1; i <= gameOptions.endRound; i++) {
         tempQuestions[i] = questionGenerator(tempPlayers);
-      };
+      }
 
       var randomSpot = Math.random() * Math.ceil(gameOptions.endRound / 2);
       randomSpot = Math.ceil(randomSpot);

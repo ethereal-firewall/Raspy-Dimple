@@ -23,9 +23,9 @@ angular.module('App')
 
 				// set verdict message
 				if (currPlayer === winner) {
-					$scope.verdict = "You Win!"
+					$scope.verdict = "You Win!";
 				} else {
-					$scope.verdict = "You Lose!"
+					$scope.verdict = "You Lose!";
 				}
 
 			});
@@ -34,3 +34,4 @@ angular.module('App')
 			$state.go("home");
 		};
 	});
+	

@@ -11,9 +11,9 @@ angular.module('App')
           scope.$apply(function () {
             scope.fileread = loadEvent.target.result;
           });
-        }
+        };
         reader.readAsDataURL(changeEvent.target.files[0]);
       });
     }
-  }
-}])
+  };
+}]);
