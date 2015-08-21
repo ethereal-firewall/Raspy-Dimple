@@ -12,9 +12,9 @@ angular.module("App")
   // Generate a random string of 5 characters that we will use for our game ID's.
    var createGameID = function () {
       var gameID = '';
-      var validChars = 'ABCDEFGHJKLMNOPQRSTUVWXYZ123456789';
+      var validChars = 'ABCDEFGHJKMNPQRSTUVWXYZ';
 
-      for(var i = 0; i < 6; i++) {
+      for(var i = 0; i < 4; i++) {
         gameID += validChars.charAt(Math.floor(Math.random() * validChars.length));
       }
 
