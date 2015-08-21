@@ -89,15 +89,13 @@ angular.module("App")
   // to move onto the next view. This acts as a gate so that players aren't
   // able to move ahead or go out of sync with the game.
   var getCurrentView = function() {
-    var curView;
     // Query game to find out if the game is in an active state.
     // This query method can be found here: https://www.firebase.com/blog/2013-10-01-queries-part-one.html#byid
-    new Firebase(firebaseRef + "/games/" + game.$id + "/currentView").once('value', function(data) {
-      curView = data.val();
-    });
+    return new Firebase(firebaseRef + "/games/" + game.$id + "/currentView");
 
-    // Return the state of our game to the controller.
-    return curView;    
+    // // Return the state of our game to the controller.
+    // // return curView;    
+    // return $firebaseObject(curView);
   }
 
   var updateCurrentView = function(view) {
