@@ -1,14 +1,9 @@
 <div class="host question-host-view" ng-controller="question_displayCtrl">
-  <!-- Todo: Replace with directive -->
-  <div class="status">
-    <span class="round">{{ currentRound }}</span>
-  	<span id="timer">{{timeLeft.$value}}</span>
-  </div>
 
-  <!-- Todo: Replace with directive -->
-  <div class="question">
-    <img src="{{ question.image }}" ng-show="isImagePrompt()">
-    <p>{{ question.question }}</p>
-  </div>
+  <span class="current-round">{{ currentRound }}</span>
+	<span id="timer">{{timeLeft.$value}}</span>
+  
+  <img src="{{ question.image }}" ng-show="isImagePrompt()">
+  <p class="question">{{ question.question }}</p>
 
 </div>

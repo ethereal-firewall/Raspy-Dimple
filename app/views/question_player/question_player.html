@@ -1,23 +1,21 @@
 <div class="question-player-view">
-  
-  <div ng-hide="holdView">
-    <!-- Todo: Replace with directive -->
-    <div class="status">
-      <span class="round">{{ currentRound }}</span>
-      <span id="timer">{{timeLeft.$value}}</span>
-    </div>
-
-    <!-- Todo: Replace with directive -->
-    <img class="question image" src="{{ question.image }}" ng-show="isImagePrompt()">
-    <p class="question text">{{ question.question }}</p>
+  <div ng-show="!holdView">
+    <p>Current Round: {{ currentRound }}</p>
+    <p class="question">{{question.question}}</p>
+    <p class="question" ng-show="isImagePrompt()">
+      <img src="{{ question.image }}">
+    </p>
    
+    <p>{{timeLeft.$value}}</p>
+
     <form ng-submit="submitPlayerAnswer(answer)">
-      <label>Your answer<input ng-model="answer" type="text"></label>
-      <button type='submit'>Push!</button>
+      <input ng-model="answer" type="textarea"/>
+      <br>
+      <button type='submit'>Submit</button>
     </form>
   </div>
 
-  <!-- Todo: Replace with directive -->
-  <div class="wait" ng-show="holdView">Waiting for other players to answer...</div>
-  
+  <div class="wait" ng-show="holdView">
+    Waiting for other players to answer . . .
+  </div>
 </div>

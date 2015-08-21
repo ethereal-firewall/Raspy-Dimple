@@ -1,12 +1,11 @@
 <div class="result-player-view">
-	<!-- Todo: Replace with directive -->
 	<p> Current Round: {{ currentRound }} </p>
-	<p>{{timeLeft.$value}}</p>
 
-	<h1>Voting Results!</h1>
+	<h1>VOTING RESULTS!</h1>
 
 	<p class="question">{{question.question}}</p>
 
+	<p>{{timeLeft.$value}}</p>
 
 	<table>
 		<tr>
@@ -21,3 +20,7 @@
 
 	<p>Get ready for next round!</p>
 </div>
+<!-- Temporary Button to move us to the next round. -->
+<!--
+<p><a ui-sref='question_player'>NEXT ROUND!</a></p>
+-->
