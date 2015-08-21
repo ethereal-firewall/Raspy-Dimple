@@ -76,6 +76,12 @@ html, body {
   font-size: 20px;
 }
 
+// Media queries
+@media screen and (max-height: 720px) {
+  html, body {
+    font-size: 15px;
+  }
+}
 @media screen and (max-width: 640px) {
   html, body {
     font-size: 15px;
@@ -86,7 +92,6 @@ html, body {
     font-size: 10px;
   }
 }
-
 
 // Setting default font/size
 body, input, button {
