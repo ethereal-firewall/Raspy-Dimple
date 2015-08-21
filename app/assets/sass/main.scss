@@ -61,12 +61,11 @@ input, button {
 
 // Variables
 $splash: #F92672;
+$alt: #D8D7C3;
 
-
-$dark: #0E2E3B;
-$primary: #166678;
-$tertiary: #D8D7C3;
+$dark: #272822;
 $light: #FFFFFF;
+
 
 
 html, body {
@@ -86,29 +85,63 @@ body {
   display: flex;
   align-items: center;
   text-align: center;
-  background: $primary;
+  background: $dark;
   color: $light;
 }
 
 h1{
   font-weight: 700;
-  font-size: 6em;
+  font-size: 6rem;
   padding: 2rem;
+  sup {
+    font-size: 0.5em;
+    margin-top: -20px;
+    position: absolute;
+  }
 }
-
 
 label {
   display: block;
-  background: darken($primary, 10%);
+  background: fade-out($dark, 0.5);
+  margin-bottom: 1rem;
+  padding: 1rem;
+  input {
+    margin: -1rem 0 -1rem 1rem;
+  }
 }
 
 input, button, label{ 
-  font-size: 2em; 
+  font-size: 2rem;
+  border-radius: 2px;
 }
 
 button {
-  background: $tertiary;
+  background: $splash;
+  padding: 1rem;
+  margin: 0 0.5rem;
+  &:hover {
+    background: $dark;
+    color: $light;
+  }
 }
+
+input {
+  width: 10rem;
+  text-align: center;
+  background: $dark;
+  color: $light;
+  padding: 1rem;
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+      /* display: none; <- Crashes Chrome on hover */
+      -webkit-appearance: none;
+      margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  }
+  &.short {
+    width: 5rem;
+  }
+}
+
 
 input[type='file'] {
   display: none;
@@ -116,7 +149,9 @@ input[type='file'] {
 
 .game-code {
   font-size: 8em;
-  color: $splash;
+  background: $splash;
+  padding: 1rem;
+  opacity: 0.8;
 }
 
 #video-bg {

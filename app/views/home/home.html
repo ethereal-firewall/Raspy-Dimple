@@ -1,12 +1,11 @@
 <div class="home-view">
   
-  <h1 class="title">Exposed!</h1>
+  <h1 class="title">Exposed<sup>2</sup></h1>
 
   <game-options ng-show="gameOptions.show"></game-options>
 
   <div class="options" ng-hide="gameOptions.show">
-    <button ng-click="toggleGameOptions()" href="">Create Game</button>
-    <button ui-sref="join">Join Game</button>
+    <button class="alt" ng-click="toggleGameOptions()" href="">Create Game</button><button ui-sref="join">Join Game</button>
   </div>
   
 </div>
