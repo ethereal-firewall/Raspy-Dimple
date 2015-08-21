@@ -1,12 +1,17 @@
 <div class="question-player-view">
   <div ng-show="!holdView">
-    <p>Current Round: {{ currentRound }}</p>
-    <p class="question">{{question.question}}</p>
-    <p class="question" ng-show="isImagePrompt()">
-      <img src="{{ question.image }}">
-    </p>
-   
-    <p>{{timeLeft.$value}}</p>
+
+    <!-- Todo: Replace with directive -->
+    <div class="status">
+      <span class="round">{{ currentRound }}</span>
+      <span id="timer">{{timeLeft.$value}}</span>
+    </div>
+
+    <!-- Todo: Replace with directive -->
+    <div class="question">
+      <img src="{{ question.image }}" ng-show="isImagePrompt()">
+      <p>{{ question.question }}</p>
+    </div>
 
     <form ng-submit="submitPlayerAnswer(answer)">
       <input ng-model="answer" type="textarea"/>
@@ -15,7 +20,7 @@
     </form>
   </div>
 
-  <div class="wait" ng-show="holdView">
-    Waiting for other players to answer . . .
-  </div>
+  <!-- Todo: Replace with directive -->
+  <div class="wait" ng-show="holdView">Waiting for other players to answer...</div>
+
 </div>
