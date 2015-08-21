@@ -102,7 +102,7 @@ module.exports = function(grunt) {
     watch: {
       client: {
         files: ['./app/**'],
-        tasks: ['jshint', 'clean', 'build', 'sass']
+        tasks: ['jshint', 'clean', 'build']
       }
     },
 
@@ -142,6 +142,7 @@ module.exports = function(grunt) {
   grunt.registerTask('build', function(n) {
 
     grunt.task.run(['concat']);
+    grunt.task.run(['sass']);
     grunt.task.run(['cssmin']);
     grunt.task.run(['copy']);
     if (grunt.option('prod')) {
@@ -170,7 +171,6 @@ module.exports = function(grunt) {
     'test',
     'clean',
     'upload',
-    'sass'
   ]);
 
 };
