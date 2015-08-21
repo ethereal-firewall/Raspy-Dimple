@@ -55,8 +55,8 @@ input, button {
 
 .main-container {
   width: 100%;
-  position: absolute;
   bottom: 2rem;
+  position: absolute;
 }
 
 // Variables
@@ -66,7 +66,9 @@ $alt: #66D9EF;
 $dark: #272822;
 $light: #FFFFFF;
 
-
+p {
+  margin-bottom: 2rem;
+}
 
 html, body {
   width: 100%;
@@ -84,6 +86,9 @@ html, body {
   html, body {
     font-size: 15px;
   }
+  #video-bg {
+    display: none;
+  }
 }
 @media screen and (max-width: 480px) {
   html, body {
@@ -94,7 +99,7 @@ html, body {
 // Setting default font/size
 body, input, button {
   font-family: 'Lato', sans-serif;
-  font-size: 1rem;
+  font-size: 2rem;
   text-transform: uppercase;
 }
 
@@ -116,6 +121,10 @@ h1{
     position: absolute;
   }
 }
+h2, h3 {
+  font-size: 4rem;
+  margin-bottom: 2rem;
+}
 
 label {
   display: block;
@@ -130,12 +139,13 @@ label {
 input, button, label{ 
   font-size: 2rem;
   border-radius: 2px;
+  margin-bottom: 2rem;
 }
 
 button {
   background: $splash;
   padding: 1rem;
-  margin: 0 0.5rem;
+  margin: 0 0.5rem 2rem;
   &:hover {
     background: $dark;
     color: $light;
@@ -180,10 +190,11 @@ input[type='file'] {
 }
 
 .game-code {
-  font-size: 8em;
+  font-size: 6em;
   background: $splash;
-  padding: 1rem;
+  padding: 0.6rem 0 1rem;
   opacity: 0.8;
+  margin-bottom: 2rem;
 }
 
 #video-bg {
@@ -200,6 +211,7 @@ input[type='file'] {
   background: url(polina.jpg) no-repeat;
   background-size: cover;
   opacity: 0.6;
+  overflow:hidden;
 }
 
 .players {
@@ -209,5 +221,62 @@ input[type='file'] {
   }
 }
 
+.status {
+  position: absolute;
+  top: -6rem;
+  right: 0;
+  .round, 
+  #timer {
+    width: 5rem;
+    height: 5rem;
+    line-height: 5rem;
+    float: right;
+    border-radius: 2px;
+    margin-left: 1rem;
+  }
+  #timer {
+    background: $dark;
+  }
+  .round {
+    background: $splash;
+  }
+
+}
+
+.answers {
+  margin-bottom: 2rem;
+  li {
+    padding: 1rem;
+    background: $light;
+    display: inline-block;
+    color: $dark;
+    border-radius: 2px;
+  }
+}
+
+.question{
+  background: $alt;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  p {
+    margin-bottom: 0;
+  }
+}
+
+table {
+  width: 100%;
+  margin-bottom: 2rem;
+  th {
+    background: $alt;
+  }
+  td {
+    background: $light;
+    color: $dark;
+  }
+  th, td {
+    padding: 1rem;
+    text-align: center;
+  }
+}
 
 
