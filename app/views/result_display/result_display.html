@@ -6,15 +6,10 @@
 
 	<div class="results">
     <question></question>
-    <div class="each animateTest" ng-repeat="answer in answers | orderBy:'-votes'">
-
-      <div class="answer">{{ answer.response }}</div>
-
-      <div class="owner" ng-show="owner">{{ getPlayerName(answer.playerKey) }}'s Answer </div>
-      <div class="ownerScore" ng-show="ownerScore">{{ getPlayerName(answer.playerKey) }} gets {{answer.points}} points!</div>
-
-    </div>
-    <div class="trueAnswer" ng-show="trueShow">Correct Answer</div>
+    <ul class="answer-results each animateTest" ng-repeat="answer in answers | orderBy:'-votes'">
+      <ul class="owner" ng-show="owner">{{ getPlayerName(answer.playerKey) }} answered: <strong>{{ answer.response }}</strong></ul>
+      <ul class="ownerScore" ng-show="ownerScore">They get <strong>{{answer.points}}</strong> points!</ul>
+    </ul>
 	</div>
 
   <button ng-click="endResultsView()" href="">Next Question</button>
