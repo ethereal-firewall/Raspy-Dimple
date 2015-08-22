@@ -54,7 +54,7 @@ angular.module('App')
       $scope.holdView = true;
       fireBaseFactory.setSubmit(playerKey);
       fireBaseFactory.addVoteToAnswer(playerKey, answerPlayerKey);
-      if (answerPlayerKey === $scope.question.subject) fireBaseFactory.incrementPlayerScore(playerKey);
+      //if (answerPlayerKey === $scope.question.subject) fireBaseFactory.incrementPlayerScore(playerKey);
       fireBaseFactory.incrementPlayerScore(answerPlayerKey);
     };
 
