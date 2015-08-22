@@ -142,8 +142,8 @@ label {
     margin: -1rem 0 -1rem 1rem;
   }
   &.clickable {
-    background: $light;
-    color: $splash;
+    background: $action;
+    color: $dark;
     font-weight: 700;
     &:hover {
       background: $alt;
@@ -244,13 +244,17 @@ input[type='file'] {
     width: 8rem;
     height: 8rem;
     background-size: cover !important;
+    margin-bottom: 0.3rem;
   }
   .name {
-    font-size: 1.5rem;
+    font-size: 1rem;
     white-space: nowrap;
   }
   .votes {
-    color: $splash;
+    color: $dark;
+    padding: 0.5rem;
+    border-radius: 2px;
+    background: $alt;
     font-weight: 900;
   }
 }
@@ -258,7 +262,7 @@ input[type='file'] {
 .status {
   position: absolute;
   top: -6rem;
-  right: 0;
+  right: 1rem;
   .round, 
   #timer {
     width: 5rem;
@@ -277,9 +281,20 @@ input[type='file'] {
 
 }
 
+.answer-results {
+  background: $alt;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  strong {
+    color: $splash;
+    font-weight: 900;
+  }
+}
+
 .answers {
-  margin: 0 1rem 2rem;
+  margin-bottom: 2rem;
   li {
+    margin: 0 0.5rem;
     padding: 1rem;
     background: $light;
     display: inline-block;
@@ -294,6 +309,11 @@ input[type='file'] {
   margin-bottom: 2rem;
   p {
     margin-bottom: 0;
+  }
+  img {
+    max-height: 20rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
   }
 }
 

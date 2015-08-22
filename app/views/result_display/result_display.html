@@ -6,9 +6,9 @@
 
 	<div class="results">
     <question></question>
-    <ul class="answers each animateTest" ng-repeat="answer in answers | orderBy:'-votes'">
-      <ul class="owner" ng-show="owner">{{ getPlayerName(answer.playerKey) }}'s Answer</ul>
-      <ul class="ownerScore" ng-show="ownerScore">{{ getPlayerName(answer.playerKey) }} gets {{answer.points}} points!</ul>
+    <ul class="answer-results each animateTest" ng-repeat="answer in answers | orderBy:'-votes'">
+      <ul class="owner" ng-show="owner">{{ getPlayerName(answer.playerKey) }} answered: <strong>{{ answer.response }}</strong></ul>
+      <ul class="ownerScore" ng-show="ownerScore">They get <strong>{{answer.points}}</strong> points!</ul>
     </ul>
 	</div>
 
