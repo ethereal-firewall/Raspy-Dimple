@@ -1,5 +1,5 @@
 angular.module("App")
-.controller("question_displayCtrl", function($scope, $state, $timeout, $interval, fireBaseFactory) {
+.controller("question_displayCtrl", function($scope, $rootScope, $state, $timeout, $interval, fireBaseFactory) {
 	
 	// get game from firebase to display question
 	var game = fireBaseFactory.getGame();
@@ -11,7 +11,9 @@ angular.module("App")
 		$scope.timeLeft = {};
 	});
 
-	fireBaseFactory.getTimer().startTimer(fireBaseFactory.getGameTime(), function(time) {
+	fireBaseFactory.getTimer().startTimer(fireBaseFactory.getGameTime());
+
+	$rootScope.$on('tick', function(ev, time) {
 		$scope.timeLeft.$value = time;
 		fireBaseFactory.allSubmitted().then(function(submitted) {
 			if ($scope.timeLeft.$value <= 0 || submitted) {
@@ -21,6 +23,7 @@ angular.module("App")
 				$scope.toVotingDisplay();
 			}
 		});
+		// console.log("tick ", time);
 	});
 
 	$scope.isImagePrompt = function () {

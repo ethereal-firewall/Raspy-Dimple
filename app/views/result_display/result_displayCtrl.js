@@ -1,5 +1,5 @@
 angular.module("App")
-.controller("result_displayCtrl", function($scope, $state, $interval, fireBaseFactory) {
+.controller("result_displayCtrl", function($scope, $rootScope, $state, $interval, fireBaseFactory) {
 	var game = fireBaseFactory.getGame();
 	if (game === null) $state.go('home');
 
@@ -14,7 +14,9 @@ angular.module("App")
 		$scope.timeLeft = {};
 	});
 
-	fireBaseFactory.getTimer().startTimer(fireBaseFactory.getGameTime(), function(time) {
+	fireBaseFactory.getTimer().startTimer(fireBaseFactory.getGameTime());
+
+	$rootScope.$on('tick', function(event, time) {
 		$scope.timeLeft.$value = time;
 		if (time === fireBaseFactory.getGameTime() || time % 5 === 0) {
 			$scope.addResult();

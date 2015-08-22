@@ -1,5 +1,5 @@
 angular.module('App')
-  .controller('question_playerCtrl', function($scope, $state, $interval, $timeout, fireBaseFactory) {
+  .controller('question_playerCtrl', function($scope, $rootScope, $state, $interval, $timeout, fireBaseFactory) {
     var game = fireBaseFactory.getGame();
     if (game === null) $state.go('home');
     var playerKey = fireBaseFactory.getPlayerKey();
@@ -19,9 +19,9 @@ angular.module('App')
       //fireBaseFactory.getTimeLeft().$bindTo($scope,'timeLeft');
       $scope.timeLeft = {};
       fireBaseFactory.clearSubmit(playerKey);
-      fireBaseFactory.getTimer().setCallback(function(time) {
-        $scope.timeLeft.$value = time;
-      });
+      // fireBaseFactory.getTimer().setCallback(function(time) {
+      //   $scope.timeLeft.$value = time;
+      // });
       currentView.on('value', function (data) {
         console.log('view changed from question');
         if (data.val() === 'voting') {
@@ -31,7 +31,9 @@ angular.module('App')
       });
     });
 
-
+    $rootScope.$on('tick', function(ev, time) {
+      $scope.timeLeft.$value = time;
+    });
     // Setting up an interval to poll Firebase and see if
     // we can automatically change views yet.
     // Store interval promise so that we can destroy it once we're done.
