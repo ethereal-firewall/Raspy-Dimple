@@ -1,5 +1,5 @@
 angular.module("App")
-.controller("voting_displayCtrl", function($scope, $state, $interval, fireBaseFactory) {
+.controller("voting_displayCtrl", function($scope, $rootScope, $state, $interval, fireBaseFactory) {
   
   // get game from firebase to display question
   var game = fireBaseFactory.getGame();
@@ -13,7 +13,9 @@ angular.module("App")
 
   // The Display has control over the timer that all the players sync to. The display thus checks with ever timer tick.
   // You must remember to call stopTimer() in order to safely end the timer before trying to start the timer again.
-  fireBaseFactory.getTimer().startTimer(fireBaseFactory.getGameTime(), function(time) {
+  fireBaseFactory.getTimer().startTimer(fireBaseFactory.getGameTime());
+
+  $rootScope.$on('tick', function(event, time) {
     $scope.timeLeft.$value = time;
     fireBaseFactory.allSubmitted().then(function(submitted) {
       if ($scope.timeLeft.$value <= 0 || submitted) {
